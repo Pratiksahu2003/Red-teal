@@ -1,22 +1,22 @@
 @extends('layouts.admin')
 
-@section('title', 'Data Centre Gallery')
+@section('title', $dataCentre->name . ' — Gallery')
 
 @section('content')
 <div class="space-y-6">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div class="flex items-center gap-4">
-            <a href="{{ route('admin.data-centre.index') }}" class="p-2 text-brand-500 hover:bg-brand-100 rounded-lg transition">
+            <a href="{{ route('admin.data-centres.edit', $dataCentre) }}" class="p-2 text-brand-500 hover:bg-brand-100 rounded-lg transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </a>
             <div>
-                <h1 class="text-2xl font-semibold text-brand-900">Data Centre Gallery</h1>
-                <p class="text-sm text-brand-500 mt-1">Upload and manage gallery images.</p>
+                <h1 class="text-2xl font-semibold text-brand-900">{{ $dataCentre->name }} — Gallery</h1>
+                <p class="text-sm text-brand-500 mt-1">Upload and manage gallery images for this facility.</p>
             </div>
         </div>
     </div>
 
-    <form method="POST" action="{{ route('admin.data-centre.gallery.store') }}" enctype="multipart/form-data" class="bg-white rounded-xl border border-brand-200 p-6">
+    <form method="POST" action="{{ route('admin.data-centres.gallery.store', $dataCentre) }}" enctype="multipart/form-data" class="bg-white rounded-xl border border-brand-200 p-6">
         @csrf
         <h3 class="font-medium text-brand-900 mb-4">Upload New Image</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -46,14 +46,14 @@
                 <div class="aspect-square relative">
                     <img src="{{ Storage::url($item->image) }}" alt="{{ $item->alt_text }}" class="w-full h-full object-cover">
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center gap-2">
-                        <form method="POST" action="{{ route('admin.data-centre.gallery.toggle', $item) }}">
+                        <form method="POST" action="{{ route('admin.data-centres.gallery.toggle', [$dataCentre, $item]) }}">
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="p-2 bg-white rounded-lg text-brand-700 hover:bg-brand-100" title="Toggle status">
                                 <i data-lucide="toggle-left" class="w-4 h-4"></i>
                             </button>
                         </form>
-                        <form x-ref="deleteGallery{{ $item->id }}" method="POST" action="{{ route('admin.data-centre.gallery.destroy', $item) }}" class="hidden">
+                        <form x-ref="deleteGallery{{ $item->id }}" method="POST" action="{{ route('admin.data-centres.gallery.destroy', [$dataCentre, $item]) }}" class="hidden">
                             @csrf
                             @method('DELETE')
                         </form>

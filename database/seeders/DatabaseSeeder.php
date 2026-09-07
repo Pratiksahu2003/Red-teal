@@ -175,6 +175,7 @@ class DatabaseSeeder extends Seeder
 
         $dataCentre = DataCentre::create([
             'name' => 'RedNTeal Oslo DC-1',
+            'slug' => 'rednteal-oslo-dc-1',
             'location' => 'Oslo, Norway',
             'country' => 'Norway',
             'address' => 'Lørenfaret 1C, 0580 Oslo',
@@ -188,6 +189,30 @@ class DatabaseSeeder extends Seeder
             'cta_description' => 'Visit our Oslo campus and see how Nordic engineering delivers world-class digital infrastructure.',
             'cta_button_text' => 'Book a Tour',
             'cta_button_url' => '/contact',
+            'sort_order' => 1,
+            'status' => 'published',
+            'is_featured' => true,
+        ]);
+
+        $stockholm = DataCentre::create([
+            'name' => 'RedNTeal Stockholm DC-2',
+            'slug' => 'rednteal-stockholm-dc-2',
+            'location' => 'Stockholm, Sweden',
+            'country' => 'Sweden',
+            'address' => 'Kista Science Tower, 164 40 Kista',
+            'latitude' => 59.4029,
+            'longitude' => 17.9436,
+            'short_description' => 'A 28MW carrier-neutral campus in Kista serving cloud providers and enterprises across Scandinavia.',
+            'full_description' => '<p>RedNTeal Stockholm DC-2 extends our Nordic footprint into Sweden\'s premier technology district. The facility delivers 28MW of renewable-powered capacity with direct fibre paths to major European internet exchanges and cloud regions.</p><p>Designed for hybrid cloud workloads, the campus offers high-density colocation, meet-me room services, and 24/7 remote hands support for regional enterprises.</p>',
+            'meta_title' => 'Stockholm Data Centre — RedNTeal DC-2',
+            'meta_description' => 'Explore RedNTeal\'s 28MW sustainable data centre in Stockholm, Sweden. Carrier-neutral connectivity and 100% renewable energy.',
+            'cta_heading' => 'Plan your deployment',
+            'cta_description' => 'Speak with our Stockholm team about colocation and cross-connect options.',
+            'cta_button_text' => 'Contact Us',
+            'cta_button_url' => '/contact',
+            'sort_order' => 2,
+            'status' => 'published',
+            'is_featured' => false,
         ]);
 
         $specs = [
@@ -225,6 +250,26 @@ class DatabaseSeeder extends Seeder
                 'is_active' => true,
             ]));
         }
+
+        DataCentreSpecification::create([
+            'data_centre_id' => $stockholm->id,
+            'label' => 'Power Capacity',
+            'value' => '28',
+            'unit' => 'MW',
+            'icon' => 'zap',
+            'sort_order' => 1,
+            'is_active' => true,
+        ]);
+
+        DataCentreFeature::create([
+            'data_centre_id' => $stockholm->id,
+            'title' => 'Connectivity',
+            'slug' => 'connectivity',
+            'description' => 'Carrier-neutral meet-me room with direct paths to major European IXPs and cloud on-ramps.',
+            'icon' => 'network',
+            'sort_order' => 1,
+            'is_active' => true,
+        ]);
 
         AboutSection::create([
             'hero_heading' => 'Building the sustainable backbone of digital Europe',

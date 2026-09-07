@@ -16,7 +16,7 @@ class DashboardController extends Controller
             'stats' => [
                 'services' => Service::count(),
                 'solutions' => Solution::count(),
-                'data_centre_sections' => DataCentre::instance()->features()->count(),
+                'data_centres' => DataCentre::count(),
                 'contact_enquiries' => ContactSubmission::count(),
             ],
             'recentContacts' => ContactSubmission::latest()->take(5)->get(),

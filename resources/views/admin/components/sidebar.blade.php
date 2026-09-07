@@ -17,7 +17,7 @@
             : 'text-brand-600 hover:bg-brand-50 hover:text-brand-900';
     @endphp
 
-    <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-6" x-data="{ website: {{ request()->routeIs('admin.settings.*') ? 'true' : 'false' }}, content: {{ request()->routeIs('admin.content.*', 'admin.services.*', 'admin.solutions.*', 'admin.data-centre.*', 'admin.blog-*') ? 'true' : 'false' }} }">
+    <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-6" x-data="{ website: {{ request()->routeIs('admin.settings.*') ? 'true' : 'false' }}, content: {{ request()->routeIs('admin.content.*', 'admin.services.*', 'admin.solutions.*', 'admin.data-centres.*', 'admin.blog-*') ? 'true' : 'false' }} }">
         <div>
             <p class="px-3 text-xs font-semibold text-brand-teal-600 uppercase tracking-wider mb-2">Main</p>
             <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm {{ $navLink(request()->routeIs('admin.dashboard'), 'red') }}">
@@ -59,7 +59,7 @@
                 <a href="{{ route('admin.solutions.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm {{ $navLink(request()->routeIs('admin.solutions.*')) }}">
                     <i data-lucide="layers" class="w-4 h-4"></i> Solutions
                 </a>
-                <a href="{{ route('admin.data-centre.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm {{ $navLink(request()->routeIs('admin.data-centre.*')) }}">
+                <a href="{{ route('admin.data-centres.index') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm {{ $navLink(request()->routeIs('admin.data-centres.*')) }}">
                     <i data-lucide="database" class="w-4 h-4"></i> Data Centre
                 </a>
                 <a href="{{ route('admin.content.about') }}" class="flex items-center gap-3 px-3 py-2 rounded-lg text-sm {{ $navLink(request()->routeIs('admin.content.about')) }}">

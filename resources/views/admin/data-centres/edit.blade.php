@@ -1,17 +1,27 @@
 @extends('layouts.admin')
 
-@section('title', 'Data Centre')
+@section('title', $dataCentre->name ?? 'Edit Data Centre')
 
 @section('content')
 <div class="space-y-6" x-data="{ tab: 'info', specModal: false, featureModal: false, editingSpec: null, editingFeature: null }">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-            <h1 class="text-2xl font-semibold text-brand-900">Data Centre</h1>
-            <p class="text-sm text-brand-500 mt-1">Manage data centre information, specifications, and features.</p>
+        <div class="flex items-center gap-4">
+            <a href="{{ route('admin.data-centres.index') }}" class="p-2 text-brand-500 hover:bg-brand-100 rounded-lg transition">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </a>
+            <div>
+                <h1 class="text-2xl font-semibold text-brand-900">{{ $dataCentre->name ?? 'Data Centre' }}</h1>
+                <p class="text-sm text-brand-500 mt-1">Manage facility information, specifications, and features.</p>
+            </div>
         </div>
-        <a href="{{ route('admin.data-centre.gallery') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-teal-600 hover:bg-brand-teal-700 text-white text-sm font-medium rounded-lg transition">
-            <i data-lucide="images" class="w-4 h-4"></i> Manage Gallery
-        </a>
+        <div class="flex items-center gap-2">
+            <a href="{{ route('data-centre.show', $dataCentre) }}" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 bg-white border border-brand-200 text-brand-700 text-sm font-medium rounded-lg hover:bg-brand-50 transition">
+                <i data-lucide="external-link" class="w-4 h-4"></i> Preview
+            </a>
+            <a href="{{ route('admin.data-centres.gallery', $dataCentre) }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-teal-600 hover:bg-brand-teal-700 text-white text-sm font-medium rounded-lg transition">
+                <i data-lucide="images" class="w-4 h-4"></i> Gallery
+            </a>
+        </div>
     </div>
 
     <div class="flex flex-wrap gap-2 border-b border-brand-200 pb-4">
@@ -20,15 +30,34 @@
         @endforeach
     </div>
 
-    <form method="POST" action="{{ route('admin.data-centre.index') }}" enctype="multipart/form-data" class="bg-white rounded-xl border border-brand-200 p-6 space-y-6" x-show="tab === 'info'">
+    <form method="POST" action="{{ route('admin.data-centres.update', $dataCentre) }}" enctype="multipart/form-data" class="bg-white rounded-xl border border-brand-200 p-6 space-y-6" x-show="tab === 'info'">
         @csrf
         @method('PUT')
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @include('admin.components.input', ['name' => 'name', 'label' => 'Data Centre Name', 'value' => $dataCentre->name])
+            @include('admin.components.input', ['name' => 'slug', 'label' => 'URL Slug', 'value' => $dataCentre->slug])
             @include('admin.components.input', ['name' => 'location', 'label' => 'Location', 'value' => $dataCentre->location])
             @include('admin.components.input', ['name' => 'country', 'label' => 'Country', 'value' => $dataCentre->country])
             @include('admin.components.input', ['name' => 'hero_video_url', 'label' => 'Hero Video URL', 'type' => 'url', 'value' => $dataCentre->hero_video_url])
+            @include('admin.components.input', ['name' => 'sort_order', 'label' => 'Sort Order', 'type' => 'number', 'value' => $dataCentre->sort_order])
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="status" class="block text-sm font-medium text-brand-700 mb-1">Status</label>
+                <select name="status" id="status" class="w-full rounded-lg border-brand-300 text-sm focus:border-brand-teal-500 focus:ring-brand-teal-500">
+                    <option value="published" @selected($dataCentre->status === 'published')>Published</option>
+                    <option value="draft" @selected($dataCentre->status === 'draft')>Draft</option>
+                </select>
+            </div>
+            <div class="flex items-end pb-2">
+                <div class="flex items-center gap-2">
+                    <input type="hidden" name="is_featured" value="0">
+                    <input type="checkbox" name="is_featured" id="is_featured" value="1" @checked($dataCentre->is_featured) class="rounded border-brand-300 text-brand-teal-600">
+                    <label for="is_featured" class="text-sm text-brand-600">Featured facility</label>
+                </div>
+            </div>
         </div>
 
         @include('admin.components.textarea', ['name' => 'address', 'label' => 'Address', 'value' => $dataCentre->address, 'rows' => 2])
@@ -67,7 +96,6 @@
         </div>
     </form>
 
-    {{-- Specifications Tab --}}
     <div x-show="tab === 'specs'" x-cloak class="bg-white rounded-xl border border-brand-200">
         <div class="flex items-center justify-between px-6 py-4 border-b border-brand-200">
             <h2 class="font-semibold text-brand-900">Specifications</h2>
@@ -88,7 +116,7 @@
                     <div class="flex items-center gap-2">
                         @include('admin.components.status-badge', ['status' => $spec->is_active ? 'active' : 'inactive'])
                         <button @click="editingSpec = @js($spec); specModal = true" type="button" class="p-2 text-brand-500 hover:text-brand-teal-600 rounded-lg"><i data-lucide="pencil" class="w-4 h-4"></i></button>
-                        <form x-ref="deleteSpec{{ $spec->id }}" method="POST" action="{{ route('admin.data-centre.specifications.destroy', $spec) }}" class="hidden">@csrf @method('DELETE')</form>
+                        <form x-ref="deleteSpec{{ $spec->id }}" method="POST" action="{{ route('admin.data-centres.specifications.destroy', [$dataCentre, $spec]) }}" class="hidden">@csrf @method('DELETE')</form>
                         <button @click="$dispatch('open-delete-modal', { form: $refs.deleteSpec{{ $spec->id }} })" type="button" class="p-2 text-brand-500 hover:text-red-600 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                     </div>
                 </div>
@@ -98,7 +126,6 @@
         </div>
     </div>
 
-    {{-- Features Tab --}}
     <div x-show="tab === 'features'" x-cloak class="bg-white rounded-xl border border-brand-200">
         <div class="flex items-center justify-between px-6 py-4 border-b border-brand-200">
             <h2 class="font-semibold text-brand-900">Features</h2>
@@ -123,7 +150,7 @@
                     <div class="flex items-center gap-2">
                         @include('admin.components.status-badge', ['status' => $feature->is_active ? 'active' : 'inactive'])
                         <button @click="editingFeature = @js($feature); featureModal = true" type="button" class="p-2 text-brand-500 hover:text-brand-teal-600 rounded-lg"><i data-lucide="pencil" class="w-4 h-4"></i></button>
-                        <form x-ref="deleteFeature{{ $feature->id }}" method="POST" action="{{ route('admin.data-centre.features.destroy', $feature) }}" class="hidden">@csrf @method('DELETE')</form>
+                        <form x-ref="deleteFeature{{ $feature->id }}" method="POST" action="{{ route('admin.data-centres.features.destroy', [$dataCentre, $feature]) }}" class="hidden">@csrf @method('DELETE')</form>
                         <button @click="$dispatch('open-delete-modal', { form: $refs.deleteFeature{{ $feature->id }} })" type="button" class="p-2 text-brand-500 hover:text-red-600 rounded-lg"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                     </div>
                 </div>
@@ -133,12 +160,11 @@
         </div>
     </div>
 
-    {{-- Spec Modal --}}
     <div x-show="specModal" x-cloak class="fixed inset-0 z-[60] flex items-center justify-center p-4">
         <div class="fixed inset-0 bg-black/50" @click="specModal = false"></div>
         <div class="relative bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto" @click.stop>
             <h3 class="text-lg font-semibold text-brand-900 mb-4" x-text="editingSpec ? 'Edit Specification' : 'Add Specification'"></h3>
-            <form method="POST" :action="editingSpec ? '{{ url('admin/data-centre/specifications') }}/' + editingSpec.id : '{{ route('admin.data-centre.specifications.store') }}'" class="space-y-4">
+            <form method="POST" :action="editingSpec ? '{{ url('admin/data-centres/'.$dataCentre->slug.'/specifications') }}/' + editingSpec.id : '{{ route('admin.data-centres.specifications.store', $dataCentre) }}'" class="space-y-4">
                 @csrf
                 <template x-if="editingSpec"><input type="hidden" name="_method" value="PUT"></template>
                 <div><label class="block text-sm font-medium text-brand-700 mb-1">Label</label><input type="text" name="label" :value="editingSpec?.label ?? ''" required class="w-full rounded-lg border-brand-300 text-sm"></div>
@@ -157,12 +183,11 @@
         </div>
     </div>
 
-    {{-- Feature Modal --}}
     <div x-show="featureModal" x-cloak class="fixed inset-0 z-[60] flex items-center justify-center p-4">
         <div class="fixed inset-0 bg-black/50" @click="featureModal = false"></div>
         <div class="relative bg-white rounded-2xl shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto" @click.stop>
             <h3 class="text-lg font-semibold text-brand-900 mb-4" x-text="editingFeature ? 'Edit Feature' : 'Add Feature'"></h3>
-            <form method="POST" enctype="multipart/form-data" :action="editingFeature ? '{{ url('admin/data-centre/features') }}/' + editingFeature.id : '{{ route('admin.data-centre.features.store') }}'" class="space-y-4">
+            <form method="POST" enctype="multipart/form-data" :action="editingFeature ? '{{ url('admin/data-centres/'.$dataCentre->slug.'/features') }}/' + editingFeature.id : '{{ route('admin.data-centres.features.store', $dataCentre) }}'" class="space-y-4">
                 @csrf
                 <template x-if="editingFeature"><input type="hidden" name="_method" value="PUT"></template>
                 <div><label class="block text-sm font-medium text-brand-700 mb-1">Title</label><input type="text" name="title" :value="editingFeature?.title ?? ''" required class="w-full rounded-lg border-brand-300 text-sm"></div>

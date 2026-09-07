@@ -180,6 +180,51 @@
 </section>
 @endif
 
+{{-- Latest Insights --}}
+@if($latestPosts->count())
+<section class="py-24 lg:py-32 bg-white border-t border-brand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+            <div>
+                <p class="text-brand-teal-600 text-sm font-medium tracking-widest uppercase mb-2">Latest Insights</p>
+                <h2 class="font-display text-4xl text-brand-900 mb-2">From Our Blog</h2>
+                <p class="text-brand-600">Expert perspectives on sustainable data centres, cloud infrastructure, and Nordic digital innovation.</p>
+            </div>
+            <a href="{{ route('blog.index') }}" class="inline-flex items-center gap-2 text-brand-teal-700 font-medium hover:text-brand-teal-600 transition shrink-0">
+                View all articles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            @foreach($latestPosts as $post)
+                <article class="group bg-white rounded-2xl border border-brand-200 overflow-hidden hover:shadow-xl hover:border-brand-teal-200 transition flex flex-col">
+                    <a href="{{ route('blog.show', $post) }}" class="block overflow-hidden">
+                        <img src="{{ $post->imageUrl() }}" alt="{{ $post->title }}" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+                    </a>
+                    <div class="p-6 flex flex-col flex-1">
+                        <div class="flex items-center gap-2 text-xs text-brand-500 mb-2">
+                            @if($post->category)
+                                <span class="text-brand-teal-600 font-semibold uppercase tracking-wide">{{ $post->category->name }}</span>
+                                <span>·</span>
+                            @endif
+                            @if($post->published_at)
+                                <time datetime="{{ $post->published_at->toDateString() }}">{{ $post->published_at->format('M j, Y') }}</time>
+                            @endif
+                        </div>
+                        <h3 class="text-xl font-semibold text-brand-900 mb-2 group-hover:text-brand-teal-700 transition">
+                            <a href="{{ route('blog.show', $post) }}">{{ $post->title }}</a>
+                        </h3>
+                        <p class="text-brand-600 text-sm leading-relaxed mb-4 flex-1">{{ Str::limit($post->excerpt, 120) }}</p>
+                        <a href="{{ route('blog.show', $post) }}" class="inline-flex items-center gap-2 text-brand-teal-700 font-medium text-sm">
+                            Read article <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
+                        </a>
+                    </div>
+                </article>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
 {{-- Final CTA --}}
 <section class="py-10 lg:py-12 border-t border-brand-200/60">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogPost;
 use App\Models\HomepageBenefit;
 use App\Models\HomepageHeroSlide;
 use App\Models\HomepageSetting;
@@ -20,6 +21,10 @@ class HomeController extends Controller
             'statistics' => HomepageStatistic::where('is_active', true)->orderBy('sort_order')->get(),
             'services' => Service::published()->take(3)->get(),
             'solutions' => Solution::published()->take(3)->get(),
+            'latestPosts' => BlogPost::published()
+                ->with('category')
+                ->take(6)
+                ->get(),
         ]);
     }
 }

@@ -7,13 +7,36 @@ use App\Models\Solution;
 use Database\Seeders\Support\LongFormSeoContent;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Http;
 
 class ServiceSolutionSeeder extends Seeder
 {
-    private const IMAGE_WIDTH = 1400;
-
-    private const IMAGE_HEIGHT = 900;
+    /** @var array<int, string> */
+    private const UNIQUE_IMAGE_URLS = [
+        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1544197150-361451702afe?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1550751827-4bd374c3d58b?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1473341304170-971dccb5ac71?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1535223396211-9c8dcf2b6d3a?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1563013547-907ae56dcb1c?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1639322537504-6427a16b0ef8?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&h=900&q=80',
+    ];
 
     public function run(): void
     {
@@ -25,6 +48,9 @@ class ServiceSolutionSeeder extends Seeder
         foreach ($this->services() as $index => $service) {
             $num = $index + 1;
             $imagePath = "images/services/service-{$num}.jpg";
+            $keywords = $service['keywords'];
+            $tableRows = $service['table_rows'];
+            unset($service['keywords'], $service['table_rows']);
 
             Service::create(array_merge($service, [
                 'featured_image' => $imagePath,
@@ -33,17 +59,20 @@ class ServiceSolutionSeeder extends Seeder
                     $service['title'],
                     $service['category'],
                     $service['slug'],
-                    $service['keywords'],
-                    $service['table_rows'],
+                    $keywords,
+                    $tableRows,
                 ),
                 'meta_title' => LongFormSeoContent::metaTitle($service['title']),
-                'meta_description' => LongFormSeoContent::metaDescription($service['title'], 'service', $service['keywords']),
+                'meta_description' => LongFormSeoContent::metaDescription($service['title'], 'service', $keywords),
             ]));
         }
 
         foreach ($this->solutions() as $index => $solution) {
             $num = $index + 1;
             $imagePath = "images/solutions/solution-{$num}.jpg";
+            $keywords = $solution['keywords'];
+            $tableRows = $solution['table_rows'];
+            unset($solution['keywords'], $solution['table_rows']);
 
             Solution::create(array_merge($solution, [
                 'featured_image' => $imagePath,
@@ -52,22 +81,31 @@ class ServiceSolutionSeeder extends Seeder
                     $solution['title'],
                     $solution['slug'],
                     $solution['benefits'],
-                    $solution['table_rows'],
-                    $solution['keywords'],
+                    $tableRows,
+                    $keywords,
                 ),
                 'meta_title' => LongFormSeoContent::metaTitle($solution['title']),
-                'meta_description' => LongFormSeoContent::metaDescription($solution['title'], 'solution', $solution['keywords']),
+                'meta_description' => LongFormSeoContent::metaDescription($solution['title'], 'solution', $keywords),
             ]));
         }
     }
 
-    private function seedImages(): void
+    private function seedImages(bool $force = true): void
     {
         $serviceDir = public_path('images/services');
         $solutionDir = public_path('images/solutions');
 
         File::ensureDirectoryExists($serviceDir);
         File::ensureDirectoryExists($solutionDir);
+
+        if ($force) {
+            foreach (File::glob("{$serviceDir}/*.jpg") as $file) {
+                File::delete($file);
+            }
+            foreach (File::glob("{$solutionDir}/*.jpg") as $file) {
+                File::delete($file);
+            }
+        }
 
         $serviceSeeds = [
             'rednteal-svc-colocation-oslo-01',
@@ -99,33 +137,37 @@ class ServiceSolutionSeeder extends Seeder
             'rednteal-sol-research-hpc-12',
         ];
 
+        $allUrls = self::UNIQUE_IMAGE_URLS;
+
         foreach ($serviceSeeds as $i => $seed) {
-            $this->downloadUniqueImage($seed, "{$serviceDir}/service-".($i + 1).'.jpg');
+            $this->downloadUniqueImage($allUrls[$i], "{$serviceDir}/service-".($i + 1).'.jpg', $seed);
         }
 
         foreach ($solutionSeeds as $i => $seed) {
-            $this->downloadUniqueImage($seed, "{$solutionDir}/solution-".($i + 1).'.jpg');
+            $this->downloadUniqueImage($allUrls[$i + 12], "{$solutionDir}/solution-".($i + 1).'.jpg', $seed);
         }
     }
 
-    private function downloadUniqueImage(string $seed, string $destination): void
+    private function downloadUniqueImage(string $url, string $destination, string $fallbackSeed): void
     {
         if (File::exists($destination) && File::size($destination) > 10_000) {
             return;
         }
 
-        $url = sprintf(
-            'https://picsum.photos/seed/%s/%d/%d',
-            urlencode($seed),
-            self::IMAGE_WIDTH,
-            self::IMAGE_HEIGHT,
-        );
-
         try {
-            $response = Http::timeout(45)->retry(2, 500)->get($url);
+            $context = stream_context_create([
+                'http' => [
+                    'method' => 'GET',
+                    'header' => "User-Agent: RedNTeal-CMS-Seeder/1.0\r\n",
+                    'timeout' => 60,
+                    'ignore_errors' => true,
+                ],
+            ]);
 
-            if ($response->successful()) {
-                File::put($destination, $response->body());
+            $body = @file_get_contents($url, false, $context);
+
+            if ($body !== false && strlen($body) > 10_000) {
+                File::put($destination, $body);
 
                 return;
             }
@@ -133,7 +175,7 @@ class ServiceSolutionSeeder extends Seeder
             // Fall back to local copy below.
         }
 
-        $this->copyFallbackImage($seed, $destination);
+        $this->copyFallbackImage($fallbackSeed, $destination);
     }
 
     private function copyFallbackImage(string $seed, string $destination): void
@@ -156,7 +198,47 @@ class ServiceSolutionSeeder extends Seeder
         }
 
         $index = abs(crc32($seed)) % count($available);
-        File::copy($available[$index], $destination);
+        $source = $available[$index];
+
+        if (! extension_loaded('gd')) {
+            File::copy($source, $destination);
+
+            return;
+        }
+
+        $type = exif_imagetype($source);
+        $image = match ($type) {
+            IMAGETYPE_JPEG => imagecreatefromjpeg($source),
+            IMAGETYPE_PNG => imagecreatefrompng($source),
+            IMAGETYPE_WEBP => imagecreatefromwebp($source),
+            default => null,
+        };
+
+        if (! $image) {
+            File::copy($source, $destination);
+
+            return;
+        }
+
+        $width = imagesx($image);
+        $height = imagesy($image);
+        $offsetX = abs(crc32($seed.'-x')) % max(1, $width - 400);
+        $offsetY = abs(crc32($seed.'-y')) % max(1, $height - 300);
+        $cropWidth = min(1200, $width - $offsetX);
+        $cropHeight = min(800, $height - $offsetY);
+
+        $cropped = imagecrop($image, [
+            'x' => $offsetX,
+            'y' => $offsetY,
+            'width' => $cropWidth,
+            'height' => $cropHeight,
+        ]) ?: $image;
+
+        imagejpeg($cropped, $destination, 88);
+        imagedestroy($image);
+        if ($cropped !== $image) {
+            imagedestroy($cropped);
+        }
     }
 
     /** @return array<int, array<string, mixed>> */

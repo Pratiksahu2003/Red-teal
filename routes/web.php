@@ -31,6 +31,7 @@ Route::get('/services/{service:slug}', [ServiceController::class, 'show'])->name
 Route::get('/solutions', [SolutionController::class, 'index'])->name('solutions.index');
 Route::get('/solutions/{solution:slug}', [SolutionController::class, 'show'])->name('solutions.show');
 Route::get('/data-centre', [DataCentreController::class, 'index'])->name('data-centre.index');
+Route::get('/data-centre/{dataCentre:slug}', [DataCentreController::class, 'show'])->name('data-centre.show');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
@@ -84,18 +85,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('solutions', AdminSolutionController::class)->except(['show']);
         Route::patch('/solutions/{solution}/toggle', [AdminSolutionController::class, 'toggleStatus'])->name('solutions.toggle');
 
-        Route::get('/data-centre', [AdminDataCentreController::class, 'edit'])->name('data-centre.index');
-        Route::put('/data-centre', [AdminDataCentreController::class, 'update']);
-        Route::post('/data-centre/specifications', [AdminDataCentreController::class, 'storeSpecification'])->name('data-centre.specifications.store');
-        Route::put('/data-centre/specifications/{specification}', [AdminDataCentreController::class, 'updateSpecification'])->name('data-centre.specifications.update');
-        Route::delete('/data-centre/specifications/{specification}', [AdminDataCentreController::class, 'destroySpecification'])->name('data-centre.specifications.destroy');
-        Route::post('/data-centre/features', [AdminDataCentreController::class, 'storeFeature'])->name('data-centre.features.store');
-        Route::put('/data-centre/features/{feature}', [AdminDataCentreController::class, 'updateFeature'])->name('data-centre.features.update');
-        Route::delete('/data-centre/features/{feature}', [AdminDataCentreController::class, 'destroyFeature'])->name('data-centre.features.destroy');
-        Route::get('/data-centre/gallery', [AdminDataCentreController::class, 'gallery'])->name('data-centre.gallery');
-        Route::post('/data-centre/gallery', [AdminDataCentreController::class, 'storeGallery'])->name('data-centre.gallery.store');
-        Route::delete('/data-centre/gallery/{gallery}', [AdminDataCentreController::class, 'destroyGallery'])->name('data-centre.gallery.destroy');
-        Route::patch('/data-centre/gallery/{gallery}/toggle', [AdminDataCentreController::class, 'toggleGallery'])->name('data-centre.gallery.toggle');
+        Route::get('/data-centres', [AdminDataCentreController::class, 'index'])->name('data-centres.index');
+        Route::get('/data-centres/create', [AdminDataCentreController::class, 'create'])->name('data-centres.create');
+        Route::post('/data-centres', [AdminDataCentreController::class, 'store'])->name('data-centres.store');
+        Route::get('/data-centres/{dataCentre}/edit', [AdminDataCentreController::class, 'edit'])->name('data-centres.edit');
+        Route::put('/data-centres/{dataCentre}', [AdminDataCentreController::class, 'update'])->name('data-centres.update');
+        Route::delete('/data-centres/{dataCentre}', [AdminDataCentreController::class, 'destroy'])->name('data-centres.destroy');
+        Route::patch('/data-centres/{dataCentre}/toggle', [AdminDataCentreController::class, 'toggleStatus'])->name('data-centres.toggle');
+        Route::post('/data-centres/{dataCentre}/specifications', [AdminDataCentreController::class, 'storeSpecification'])->name('data-centres.specifications.store');
+        Route::put('/data-centres/{dataCentre}/specifications/{specification}', [AdminDataCentreController::class, 'updateSpecification'])->name('data-centres.specifications.update');
+        Route::delete('/data-centres/{dataCentre}/specifications/{specification}', [AdminDataCentreController::class, 'destroySpecification'])->name('data-centres.specifications.destroy');
+        Route::post('/data-centres/{dataCentre}/features', [AdminDataCentreController::class, 'storeFeature'])->name('data-centres.features.store');
+        Route::put('/data-centres/{dataCentre}/features/{feature}', [AdminDataCentreController::class, 'updateFeature'])->name('data-centres.features.update');
+        Route::delete('/data-centres/{dataCentre}/features/{feature}', [AdminDataCentreController::class, 'destroyFeature'])->name('data-centres.features.destroy');
+        Route::get('/data-centres/{dataCentre}/gallery', [AdminDataCentreController::class, 'gallery'])->name('data-centres.gallery');
+        Route::post('/data-centres/{dataCentre}/gallery', [AdminDataCentreController::class, 'storeGallery'])->name('data-centres.gallery.store');
+        Route::delete('/data-centres/{dataCentre}/gallery/{gallery}', [AdminDataCentreController::class, 'destroyGallery'])->name('data-centres.gallery.destroy');
+        Route::patch('/data-centres/{dataCentre}/gallery/{gallery}/toggle', [AdminDataCentreController::class, 'toggleGallery'])->name('data-centres.gallery.toggle');
 
         Route::get('/contact-submissions', [ContactSubmissionController::class, 'index'])->name('contact-submissions.index');
         Route::get('/contact-submissions/{contactSubmission}', [ContactSubmissionController::class, 'show'])->name('contact-submissions.show');
