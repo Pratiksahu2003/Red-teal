@@ -62,9 +62,6 @@
             <div>
                 <h4 class="text-brand-900 font-bold text-sm mb-2.5">Services</h4>
                 <ul class="space-y-1.5">
-                    <li>
-                        <a href="{{ route('services.index') }}" class="text-sm text-brand-600 hover:text-brand-red-500 transition">View All Services</a>
-                    </li>
                     @forelse($footerServices ?? [] as $service)
                         <li>
                             <a href="{{ route('services.show', $service) }}" class="text-sm text-brand-600 hover:text-brand-red-500 transition">{{ $service->title }}</a>
@@ -73,14 +70,15 @@
                         <li class="text-sm text-brand-400">No services yet.</li>
                     @endforelse
                 </ul>
+                <a href="{{ route('services.index') }}" class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-brand-red-500 hover:text-brand-red-600 transition group">
+                    View All Services
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
             </div>
 
             <div>
                 <h4 class="text-brand-900 font-bold text-sm mb-2.5">Solutions</h4>
                 <ul class="space-y-1.5">
-                    <li>
-                        <a href="{{ route('solutions.index') }}" class="text-sm text-brand-600 hover:text-brand-red-500 transition">View All Solutions</a>
-                    </li>
                     @forelse($footerSolutions ?? [] as $solution)
                         <li>
                             <a href="{{ route('solutions.show', $solution) }}" class="text-sm text-brand-600 hover:text-brand-red-500 transition">{{ $solution->title }}</a>
@@ -89,6 +87,10 @@
                         <li class="text-sm text-brand-400">No solutions yet.</li>
                     @endforelse
                 </ul>
+                <a href="{{ route('solutions.index') }}" class="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-brand-red-500 hover:text-brand-red-600 transition group">
+                    View All Solutions
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
             </div>
 
             <div>
@@ -142,13 +144,13 @@
                 <a href="{{ route('blog.index') }}" class="text-brand-500 hover:text-brand-red-500 transition">Blog</a>
                 <span class="text-brand-300 select-none">·</span>
                 <a href="{{ route('services.index') }}" class="text-brand-500 hover:text-brand-red-500 transition">Services</a>
-                @foreach($footerServices ?? [] as $service)
+                @foreach($sitemapServices ?? [] as $service)
                     <span class="text-brand-300 select-none">·</span>
                     <a href="{{ route('services.show', $service) }}" class="text-brand-500 hover:text-brand-red-500 transition">{{ $service->title }}</a>
                 @endforeach
                 <span class="text-brand-300 select-none">·</span>
                 <a href="{{ route('solutions.index') }}" class="text-brand-500 hover:text-brand-red-500 transition">Solutions</a>
-                @foreach($footerSolutions ?? [] as $solution)
+                @foreach($sitemapSolutions ?? [] as $solution)
                     <span class="text-brand-300 select-none">·</span>
                     <a href="{{ route('solutions.show', $solution) }}" class="text-brand-500 hover:text-brand-red-500 transition">{{ $solution->title }}</a>
                 @endforeach

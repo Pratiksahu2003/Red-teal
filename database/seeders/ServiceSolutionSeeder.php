@@ -27,7 +27,7 @@ class ServiceSolutionSeeder extends Seeder
         'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&h=900&q=80',
         'https://images.unsplash.com/photo-1535223396211-9c8dcf2b6d3a?auto=format&fit=crop&w=1400&h=900&q=80',
         'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1400&h=900&q=80',
-        'https://images.unsplash.com/photo-1563013547-907ae56dcb1c?auto=format&fit=crop&w=1400&h=900&q=80',
+        'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&h=900&q=85',
         'https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1400&h=900&q=80',
         'https://images.unsplash.com/photo-1639322537504-6427a16b0ef8?auto=format&fit=crop&w=1400&h=900&q=80',
         'https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=1400&h=900&q=80',

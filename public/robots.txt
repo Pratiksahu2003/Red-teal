@@ -1,2 +1,26 @@
+# RedNTeal — robots.txt
+# Generated for search engine crawlers. Regenerate with: php artisan sitemap:generate
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /build/
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+Sitemap: https://rednteal.test/sitemap.xml

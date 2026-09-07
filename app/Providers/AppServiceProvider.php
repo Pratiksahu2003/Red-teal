@@ -23,9 +23,18 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['components.footer', 'layouts.app', 'components.navbar'], function ($view) {
             $view->with([
-                'footerServices' => Service::published()->get(['id', 'title', 'slug']),
-                'footerSolutions' => Solution::published()->get(['id', 'title', 'slug']),
+                'footerServices' => Service::where('status', 'published')
+                    ->orderByDesc('updated_at')
+                    ->limit(7)
+                    ->get(['id', 'title', 'slug']),
+                'footerSolutions' => Solution::where('status', 'published')
+                    ->orderByDesc('updated_at')
+                    ->limit(7)
+                    ->get(['id', 'title', 'slug']),
+                'sitemapServices' => Service::published()->get(['id', 'title', 'slug']),
+                'sitemapSolutions' => Solution::published()->get(['id', 'title', 'slug']),
                 'navServicesByCategory' => Service::groupedForNav(),
+                'navSolutionsByCategory' => Solution::groupedForNav(),
             ]);
         });
     }
