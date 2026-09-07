@@ -1,0 +1,276 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\AboutSection;
+use App\Models\AboutValue;
+use App\Models\CompanySetting;
+use App\Models\ContactSubmission;
+use App\Models\DataCentre;
+use App\Models\DataCentreFeature;
+use App\Models\DataCentreSpecification;
+use App\Models\HomepageBenefit;
+use App\Models\HomepageHeroSlide;
+use App\Models\HomepageSetting;
+use App\Models\HomepageStatistic;
+use App\Models\SiteSetting;
+use App\Models\SocialLink;
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class DatabaseSeeder extends Seeder
+{
+    public function run(): void
+    {
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@example.com',
+            'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
+            'is_admin' => true,
+        ]);
+
+        CompanySetting::create([
+            'company_name' => 'RedNTeal Data Centres',
+            'short_name' => 'RedNTeal',
+            'tagline' => 'Technology You Can Trust',
+            'description' => 'RedNTeal designs, builds, and operates premium data centre facilities powered entirely by renewable energy across Northern Europe.',
+            'about_company' => 'Founded with a vision to deliver world-class digital infrastructure without compromising the environment, RedNTeal combines Nordic engineering excellence with cutting-edge sustainability practices. Our facilities serve enterprises, cloud providers, and research institutions who demand reliability, security, and a net-zero carbon footprint.',
+            'email' => 'hello@rednteal.com',
+            'phone' => '+47 22 00 00 00',
+            'secondary_phone' => '+46 8 00 00 00',
+            'address' => 'Akersgata 12',
+            'city' => 'Oslo',
+            'state' => 'Oslo',
+            'country' => 'Norway',
+            'postal_code' => '0158',
+            'founded_year' => '2018',
+            'vat_number' => 'NO123456789MVA',
+            'business_registration_number' => '918 765 432',
+            'logo' => 'branding/logo.png',
+            'favicon' => 'branding/favicon.png',
+            'footer_logo' => 'branding/logo.png',
+        ]);
+
+        SiteSetting::create([
+            'website_name' => 'RedNTeal',
+            'website_url' => 'http://localhost',
+            'default_page_title' => 'RedNTeal — Sustainable Nordic Data Centres',
+            'default_meta_description' => 'Premium renewable-powered data centre infrastructure in Northern Europe. Colocation, cloud connectivity, and enterprise hosting with 100% green energy.',
+            'default_keywords' => 'data centre, nordic, sustainable, colocation, renewable energy, green hosting',
+            'timezone' => 'Europe/Oslo',
+            'default_language' => 'en',
+        ]);
+
+        $socialPlatforms = [
+            ['platform' => 'LinkedIn', 'url' => 'https://linkedin.com/company/rednteal', 'icon' => 'linkedin', 'sort_order' => 1],
+            ['platform' => 'X', 'url' => 'https://x.com/rednteal', 'icon' => 'twitter', 'sort_order' => 2],
+            ['platform' => 'Facebook', 'url' => 'https://facebook.com/rednteal', 'icon' => 'facebook', 'sort_order' => 3],
+            ['platform' => 'Instagram', 'url' => 'https://instagram.com/rednteal', 'icon' => 'instagram', 'sort_order' => 4],
+            ['platform' => 'GitHub', 'url' => 'https://github.com/rednteal', 'icon' => 'github', 'sort_order' => 5],
+            ['platform' => 'YouTube', 'url' => 'https://youtube.com/@rednteal', 'icon' => 'youtube', 'sort_order' => 6],
+        ];
+
+        foreach ($socialPlatforms as $social) {
+            SocialLink::create(array_merge($social, ['is_active' => true]));
+        }
+
+        HomepageSetting::create([
+            'hero_heading' => 'Technology You Can Trust',
+            'hero_subtitle' => 'RedNTeal Data Centres',
+            'hero_description' => 'RedNTeal delivers enterprise-grade colocation and cloud connectivity from facilities powered entirely by renewable energy — where Nordic precision meets environmental responsibility.',
+            'hero_cta_text' => 'Explore Our Data Centre',
+            'hero_cta_url' => '/data-centre',
+            'hero_secondary_cta_text' => 'View Services',
+            'hero_secondary_cta_url' => '/services',
+            'intro_heading' => 'Where reliability meets responsibility',
+            'intro_description' => 'Our facilities are engineered for 99.999% uptime while maintaining a PUE below 1.2. Every watt consumed is matched by certified renewable generation, making RedNTeal the preferred partner for organisations committed to digital growth and climate action.',
+            'sustainability_heading' => '100% renewable. Zero compromise.',
+            'sustainability_description' => 'From hydroelectric power in Norway to wind energy in Sweden, every RedNTeal facility runs on certified green electricity. We publish real-time sustainability metrics and hold ourselves accountable to the highest environmental standards in the industry.',
+            'sustainability_cta_text' => 'Our Sustainability Commitment',
+            'sustainability_cta_url' => '/about',
+            'infrastructure_heading' => 'Built for scale, designed for security',
+            'infrastructure_description' => 'Tier III+ architecture, biometric access controls, 24/7 NOC monitoring, and carrier-neutral connectivity to 40+ networks ensure your critical workloads are protected and always reachable.',
+            'final_cta_heading' => 'Ready to power your next chapter?',
+            'final_cta_description' => 'Speak with our infrastructure specialists about colocation, dedicated hosting, or custom enterprise solutions tailored to your requirements.',
+            'final_cta_button_text' => 'Get in Touch',
+            'final_cta_button_url' => '/contact',
+        ]);
+
+        $heroSlides = [
+            [
+                'category' => 'Data Centre',
+                'title' => 'RedNTeal Oslo DC-1 Delivers 45MW of Sustainable Power',
+                'description' => 'Our flagship Nordic facility runs on 100% renewable energy with a PUE of 1.12 — enterprise-grade colocation built for the future of digital infrastructure.',
+                'image' => 'images/hero-slide-1.jpg',
+                'cta_text' => 'Read More',
+                'cta_url' => '/data-centre',
+                'sort_order' => 1,
+            ],
+            [
+                'category' => 'Cloud Connectivity',
+                'title' => 'Direct On-Ramps to AWS, Azure and Google Cloud',
+                'description' => 'Accelerate hybrid cloud strategies with low-latency cross-connects and carrier-neutral connectivity from our Oslo meet-me room.',
+                'image' => 'images/hero-slide-2.jpg',
+                'cta_text' => 'Read More',
+                'cta_url' => '/services',
+                'sort_order' => 2,
+            ],
+            [
+                'category' => 'Sustainability',
+                'title' => '100% Renewable Energy Across All Nordic Facilities',
+                'description' => 'Every kilowatt-hour matched by certified green generation. Real-time carbon reporting and industry-leading environmental accountability.',
+                'image' => 'images/hero-slide-3.jpg',
+                'cta_text' => 'Read More',
+                'cta_url' => '/about',
+                'sort_order' => 3,
+            ],
+            [
+                'category' => 'Enterprise Security',
+                'title' => 'ISO 27001 Certified with Tier III+ Architecture',
+                'description' => 'Biometric access, 24/7 NOC monitoring, and multi-layer physical security protect your most critical workloads around the clock.',
+                'image' => 'images/hero-slide-4.jpg',
+                'cta_text' => 'Read More',
+                'cta_url' => '/solutions',
+                'sort_order' => 4,
+            ],
+            [
+                'category' => 'Colocation',
+                'title' => 'Scale From Single Racks to 500-Rack Deployments',
+                'description' => 'Flexible power density up to 50kW per rack with modular hall design — grow your infrastructure without service interruption.',
+                'image' => 'images/hero-slide-5.jpg',
+                'cta_text' => 'Read More',
+                'cta_url' => '/contact',
+                'sort_order' => 5,
+            ],
+        ];
+
+        foreach ($heroSlides as $slide) {
+            HomepageHeroSlide::create(array_merge($slide, ['is_active' => true]));
+        }
+
+        $benefits = [
+            ['title' => 'Renewable Energy', 'description' => 'Every facility powered by certified hydro, wind, and solar generation.', 'icon' => 'leaf', 'sort_order' => 1],
+            ['title' => 'Nordic Reliability', 'description' => 'Cool climate reduces cooling costs and enables industry-leading PUE ratings.', 'icon' => 'snowflake', 'sort_order' => 2],
+            ['title' => 'Carrier Neutral', 'description' => 'Connect to 40+ carriers and cloud on-ramps from a single cross-connect.', 'icon' => 'network', 'sort_order' => 3],
+            ['title' => 'Enterprise Security', 'description' => 'ISO 27001 certified with multi-layer physical and cyber security.', 'icon' => 'shield-check', 'sort_order' => 4],
+        ];
+
+        foreach ($benefits as $benefit) {
+            HomepageBenefit::create(array_merge($benefit, ['is_active' => true]));
+        }
+
+        $statistics = [
+            ['number' => '165+', 'label' => 'MW Capacity', 'description' => 'Total power across Nordic facilities', 'sort_order' => 1],
+            ['number' => '100%', 'label' => 'Renewable Energy', 'description' => 'Certified green energy supply', 'sort_order' => 2],
+            ['number' => '99.999%', 'label' => 'Uptime SLA', 'description' => 'Tier III+ availability guarantee', 'sort_order' => 3],
+            ['number' => '1.12', 'label' => 'Average PUE', 'description' => 'Industry-leading efficiency', 'sort_order' => 4],
+        ];
+
+        foreach ($statistics as $stat) {
+            HomepageStatistic::create(array_merge($stat, ['is_active' => true]));
+        }
+
+        $this->call(ServiceSolutionSeeder::class);
+
+        $dataCentre = DataCentre::create([
+            'name' => 'RedNTeal Oslo DC-1',
+            'location' => 'Oslo, Norway',
+            'country' => 'Norway',
+            'address' => 'Lørenfaret 1C, 0580 Oslo',
+            'latitude' => 59.9311,
+            'longitude' => 10.7979,
+            'short_description' => 'Our flagship 45MW facility in the heart of Oslo, powered entirely by Norwegian hydroelectric energy.',
+            'full_description' => '<p>RedNTeal Oslo DC-1 represents the pinnacle of sustainable data centre design. Located in the Løren industrial district with direct access to Norway\'s robust power grid, this facility combines 45MW of available capacity with a PUE of 1.12 — among the lowest in Europe.</p><p>The building features free-air cooling for 70% of the year, advanced fire suppression, and biometric access at every security zone. Carrier-neutral connectivity reaches 42 networks including direct cloud on-ramps to AWS, Azure, and Google Cloud.</p>',
+            'meta_title' => 'Oslo Data Centre — RedNTeal DC-1',
+            'meta_description' => 'Explore RedNTeal\'s flagship 45MW sustainable data centre in Oslo, Norway. 100% renewable energy, Tier III+ design.',
+            'cta_heading' => 'Schedule a facility tour',
+            'cta_description' => 'Visit our Oslo campus and see how Nordic engineering delivers world-class digital infrastructure.',
+            'cta_button_text' => 'Book a Tour',
+            'cta_button_url' => '/contact',
+        ]);
+
+        $specs = [
+            ['label' => 'Power Capacity', 'value' => '45', 'unit' => 'MW', 'icon' => 'zap', 'sort_order' => 1],
+            ['label' => 'Available Capacity', 'value' => '12', 'unit' => 'MW', 'icon' => 'battery-charging', 'sort_order' => 2],
+            ['label' => 'Renewable Energy', 'value' => '100', 'unit' => '%', 'icon' => 'leaf', 'sort_order' => 3],
+            ['label' => 'PUE Rating', 'value' => '1.12', 'unit' => '', 'icon' => 'gauge', 'sort_order' => 4],
+            ['label' => 'Facility Size', 'value' => '18,500', 'unit' => 'm²', 'icon' => 'building', 'sort_order' => 5],
+            ['label' => 'Rack Capacity', 'value' => '3,200', 'unit' => 'racks', 'icon' => 'server', 'sort_order' => 6],
+            ['label' => 'Cooling Capacity', 'value' => '52', 'unit' => 'MW', 'icon' => 'snowflake', 'sort_order' => 7],
+            ['label' => 'Network Capacity', 'value' => '100', 'unit' => 'Gbps', 'icon' => 'network', 'sort_order' => 8],
+            ['label' => 'Security Level', 'value' => 'Tier IV', 'unit' => '', 'icon' => 'shield', 'sort_order' => 9],
+            ['label' => 'Availability Target', 'value' => '99.999', 'unit' => '%', 'icon' => 'activity', 'sort_order' => 10],
+        ];
+
+        foreach ($specs as $spec) {
+            DataCentreSpecification::create(array_merge($spec, [
+                'data_centre_id' => $dataCentre->id,
+                'is_active' => true,
+            ]));
+        }
+
+        $features = [
+            ['title' => 'Energy', 'slug' => 'energy', 'description' => '100% certified hydroelectric power with real-time carbon reporting and renewable energy certificates for every kWh consumed.', 'icon' => 'zap', 'sort_order' => 1],
+            ['title' => 'Cooling', 'slug' => 'cooling', 'description' => 'Hybrid free-air and chilled water cooling systems optimised for Nordic climate, achieving PUE as low as 1.12.', 'icon' => 'snowflake', 'sort_order' => 2],
+            ['title' => 'Connectivity', 'slug' => 'connectivity', 'description' => 'Carrier-neutral meet-me room with 42 network providers, direct cloud on-ramps, and sub-5ms latency to major European hubs.', 'icon' => 'network', 'sort_order' => 3],
+            ['title' => 'Security', 'slug' => 'security', 'description' => 'ISO 27001 certified with biometric access, 24/7 CCTV, mantrap entries, and on-site security personnel.', 'icon' => 'shield-check', 'sort_order' => 4],
+            ['title' => 'Scalability', 'slug' => 'scalability', 'description' => 'Modular hall design allows expansion from single racks to 500-rack deployments without service interruption.', 'icon' => 'maximize-2', 'sort_order' => 5],
+            ['title' => 'Location', 'slug' => 'location', 'description' => 'Strategically positioned in Oslo with excellent fibre infrastructure, political stability, and access to skilled technical workforce.', 'icon' => 'map-pin', 'sort_order' => 6],
+        ];
+
+        foreach ($features as $feature) {
+            DataCentreFeature::create(array_merge($feature, [
+                'data_centre_id' => $dataCentre->id,
+                'is_active' => true,
+            ]));
+        }
+
+        AboutSection::create([
+            'hero_heading' => 'Building the sustainable backbone of digital Europe',
+            'hero_description' => 'RedNTeal was founded on a simple belief: the world\'s digital infrastructure should strengthen, not weaken, our planet. From our headquarters in Oslo, we design and operate data centres that prove sustainability and performance are not opposing forces.',
+            'mission' => 'To deliver world-class digital infrastructure powered entirely by renewable energy, enabling organisations to grow their digital capabilities while achieving their sustainability goals.',
+            'vision' => 'A future where every byte processed in Europe runs on clean energy, hosted in facilities that set the global standard for efficiency and environmental responsibility.',
+            'story' => '<p>RedNTeal began in 2018 when a team of Nordic engineers and sustainability advocates recognised that the explosive growth of cloud computing was creating an equally explosive growth in energy demand. Rather than accept the status quo, they set out to prove that data centres could be both powerful and pristine.</p><p>Our first facility in Oslo opened in 2020, immediately achieving a PUE of 1.15 — well below the industry average. Today, we operate across Scandinavia with a pipeline of new facilities, each designed to push the boundaries of what sustainable infrastructure can achieve.</p>',
+            'sustainability' => 'Sustainability is not a feature at RedNTeal — it is our foundation. We source 100% renewable energy, publish quarterly sustainability reports, and design every facility to minimise waste heat, water consumption, and embodied carbon in construction materials.',
+            'cta_heading' => 'Join us in building a greener digital future',
+            'cta_description' => 'Whether you need colocation, cloud connectivity, or a custom enterprise solution, our team is ready to help.',
+            'cta_button_text' => 'Contact Our Team',
+            'cta_button_url' => '/contact',
+            'meta_title' => 'About RedNTeal — Sustainable Nordic Data Centres',
+        ]);
+
+        $values = [
+            ['title' => 'Integrity', 'description' => 'We operate transparently, publish real metrics, and hold ourselves accountable to the commitments we make.', 'icon' => 'badge-check', 'sort_order' => 1],
+            ['title' => 'Innovation', 'description' => 'We continuously invest in cooling, power, and automation technologies that push efficiency boundaries.', 'icon' => 'lightbulb', 'sort_order' => 2],
+            ['title' => 'Partnership', 'description' => 'We work alongside our clients as long-term partners, not just vendors, to solve complex infrastructure challenges.', 'icon' => 'handshake', 'sort_order' => 3],
+            ['title' => 'Stewardship', 'description' => 'We treat the environments and communities where we operate as responsibilities, not resources to exploit.', 'icon' => 'globe', 'sort_order' => 4],
+        ];
+
+        foreach ($values as $value) {
+            AboutValue::create(array_merge($value, ['is_active' => true]));
+        }
+
+        ContactSubmission::create([
+            'name' => 'Erik Johansson',
+            'company' => 'Nordic Fintech AS',
+            'email' => 'erik.johansson@nordicfintech.no',
+            'phone' => '+47 900 00 001',
+            'project_type' => 'Colocation',
+            'message' => 'We are looking for 20kW of colocation space with direct AWS connectivity. Could you provide availability and pricing for your Oslo facility?',
+            'status' => 'new',
+        ]);
+
+        ContactSubmission::create([
+            'name' => 'Anna Lindström',
+            'company' => 'Uppsala University',
+            'email' => 'anna.lindstrom@uu.se',
+            'phone' => '+46 70 000 0002',
+            'project_type' => 'HPC',
+            'message' => 'Our research group needs high-density compute capacity for climate modelling. Interested in learning about your HPC solutions and academic pricing.',
+            'status' => 'contacted',
+        ]);
+
+        $this->call(BlogSeeder::class);
+    }
+}

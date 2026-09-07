@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+
+    /* RedNTeal brand — from logo */
+    --color-brand-red-50: #fdf2f2;
+    --color-brand-red-100: #fce4e4;
+    --color-brand-red-200: #f9c8c8;
+    --color-brand-red-300: #f2a0a0;
+    --color-brand-red-400: #e06060;
+    --color-brand-red-500: #921a1d;
+    --color-brand-red-600: #7a1619;
+    --color-brand-red-700: #621214;
+    --color-brand-red-800: #4a0e0f;
+    --color-brand-red-900: #320a0b;
+
+    --color-brand-teal-50: #eef7f8;
+    --color-brand-teal-100: #d5ecef;
+    --color-brand-teal-200: #abd9df;
+    --color-brand-teal-300: #6bb8c4;
+    --color-brand-teal-400: #2a9aab;
+    --color-brand-teal-500: #1a7b8b;
+    --color-brand-teal-600: #156574;
+    --color-brand-teal-700: #104f5c;
+    --color-brand-teal-800: #0c3a44;
+    --color-brand-teal-900: #08252c;
+
+    --color-brand-50: #fafafa;
+    --color-brand-100: #f4f4f4;
+    --color-brand-200: #e8e8e8;
+    --color-brand-300: #d1d1d1;
+    --color-brand-400: #a3a3a3;
+    --color-brand-500: #737373;
+    --color-brand-600: #525252;
+    --color-brand-700: #404040;
+    --color-brand-800: #262626;
+    --color-brand-900: #1a1a1a;
+    --color-brand-950: #0f0f0f;
+}
+
+[x-cloak] { display: none !important; }
+
+.prose-content p { margin-bottom: 1rem; line-height: 1.75; }
+.prose-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+.prose-content h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--color-brand-900); }
+
+.blog-content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+.blog-content th, .blog-content td { border: 1px solid var(--color-brand-200); padding: 0.65rem 0.85rem; text-align: left; }
+.blog-content th { background: var(--color-brand-100); font-weight: 600; color: var(--color-brand-900); }
+.blog-content tr:nth-child(even) td { background: var(--color-brand-50); }
+
+/* Brand utilities */
+.brand-gradient {
+    background: linear-gradient(135deg, var(--color-brand-900) 0%, var(--color-brand-red-700) 45%, var(--color-brand-teal-700) 100%);
+}
+
+.brand-gradient-subtle {
+    background: linear-gradient(135deg, var(--color-brand-50) 0%, var(--color-brand-teal-50) 100%);
+}
+
+.brand-text-gradient {
+    background: linear-gradient(90deg, var(--color-brand-red-500), var(--color-brand-teal-500));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.btn-brand-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-red-500 hover:bg-brand-red-600 text-white font-medium rounded-full transition shadow-sm hover:shadow-md;
+}
+
+.btn-brand-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand-teal-500 hover:bg-brand-teal-600 text-white font-medium rounded-full transition shadow-sm hover:shadow-md;
+}
+
+.btn-brand-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-brand-teal-500 text-brand-teal-600 hover:bg-brand-teal-50 font-medium rounded-full transition;
+}
+
+.section-label {
+    @apply text-brand-teal-500 text-sm font-semibold tracking-widest uppercase;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
