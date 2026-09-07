@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\BlogCategory;
 use App\Models\Service;
 use App\Models\Solution;
 use App\Services\SiteSettingsService;
@@ -35,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
                 'sitemapSolutions' => Solution::published()->get(['id', 'title', 'slug']),
                 'navServicesByCategory' => Service::groupedForNav(),
                 'navSolutionsByCategory' => Solution::groupedForNav(),
+                'navBlogByCategory' => BlogCategory::groupedForNav(),
             ]);
         });
     }

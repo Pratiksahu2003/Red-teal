@@ -13,6 +13,7 @@ use App\Models\HomepageBenefit;
 use App\Models\HomepageHeroSlide;
 use App\Models\HomepageSetting;
 use App\Models\HomepageStatistic;
+use App\Models\HomepageTestimonial;
 use App\Models\SiteSetting;
 use App\Models\SocialLink;
 use App\Models\User;
@@ -44,12 +45,13 @@ class DatabaseSeeder extends Seeder
             'state' => 'Oslo',
             'country' => 'Norway',
             'postal_code' => '0158',
+            'map_link' => 'https://www.google.com/maps/place/Akersgata+12,+0158+Oslo,+Norway',
             'founded_year' => '2018',
             'vat_number' => 'NO123456789MVA',
             'business_registration_number' => '918 765 432',
-            'logo' => 'branding/logo.png',
-            'favicon' => 'branding/favicon.png',
-            'footer_logo' => 'branding/logo.png',
+            'logo' => 'Logo/logo.png',
+            'favicon' => 'Logo/favicon.ico',
+            'footer_logo' => 'Logo/logo.png',
         ]);
 
         SiteSetting::create([
@@ -315,6 +317,67 @@ class DatabaseSeeder extends Seeder
             'message' => 'Our research group needs high-density compute capacity for climate modelling. Interested in learning about your HPC solutions and academic pricing.',
             'status' => 'contacted',
         ]);
+
+        $testimonials = [
+            [
+                'name' => 'Priya Sharma',
+                'role' => 'Chief Technology Officer',
+                'company' => 'Mumbai FinTech Solutions',
+                'location' => 'Mumbai, India',
+                'quote' => 'RedNTeal gave us Nordic-grade colocation with latency that works for our European trading desks. Migration was smooth, and their team understood our RBI compliance requirements from day one.',
+                'rating' => 5,
+                'sort_order' => 1,
+            ],
+            [
+                'name' => 'Arjun Mehta',
+                'role' => 'Head of Infrastructure',
+                'company' => 'CloudScale India',
+                'location' => 'Bengaluru, India',
+                'quote' => 'We needed carrier-neutral connectivity and renewable energy credentials for our SaaS platform. RedNTeal delivered both — our PUE reporting to enterprise clients has never looked better.',
+                'rating' => 5,
+                'sort_order' => 2,
+            ],
+            [
+                'name' => 'Rekha Nair',
+                'role' => 'VP Engineering',
+                'company' => 'MediCare Digital',
+                'location' => 'Chennai, India',
+                'quote' => 'Hosting healthcare workloads in a Tier III+ facility with 24/7 NOC monitoring gave our hospital partners the confidence they needed. RedNTeal\'s security posture exceeded our audit checklist.',
+                'rating' => 5,
+                'sort_order' => 3,
+            ],
+            [
+                'name' => 'Vikram Singh',
+                'role' => 'Director of IT Operations',
+                'company' => 'ShopKart India',
+                'location' => 'New Delhi, India',
+                'quote' => 'During peak festival season, uptime is everything. RedNTeal\'s Oslo facility handled our traffic spikes without a single incident. Their support team responds within minutes, not hours.',
+                'rating' => 5,
+                'sort_order' => 4,
+            ],
+            [
+                'name' => 'Ananya Iyer',
+                'role' => 'Head of Cloud Architecture',
+                'company' => 'Hyderabad Tech Labs',
+                'location' => 'Hyderabad, India',
+                'quote' => 'The direct cloud on-ramps to AWS and Azure saved us months of networking work. RedNTeal feels like an extension of our engineering team — proactive, transparent, and deeply technical.',
+                'rating' => 5,
+                'sort_order' => 5,
+            ],
+            [
+                'name' => 'Rohan Kapoor',
+                'role' => 'Chief Information Officer',
+                'company' => 'Pune Manufacturing Group',
+                'location' => 'Pune, India',
+                'quote' => 'We evaluated facilities across Europe and chose RedNTeal for their sustainability credentials and biometric security. Our board was impressed by the quarterly carbon reporting they provide.',
+                'rating' => 5,
+                'sort_order' => 6,
+            ],
+        ];
+
+        foreach ($testimonials as $testimonial) {
+            HomepageTestimonial::create(array_merge($testimonial, ['is_active' => true]));
+        }
 
         $this->call(BlogSeeder::class);
     }

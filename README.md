@@ -1,58 +1,299 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# RedNTeal — Sustainable Nordic Data Centres
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack marketing website and content management system for **RedNTeal Data Centres**. Built with Laravel 13, Tailwind CSS 4, Alpine.js, and GSAP. Includes a public-facing site with mega-menu navigation, blog, data centre listings, contact forms with maps, and a complete admin panel to manage all content.
 
-## About Laravel
+**Copyright © [VedMint](https://vedmint.com). All rights reserved.**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This project is proprietary software. Unauthorized copying, distribution, or modification is prohibited without written permission from VedMint.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Features
 
-## Learning Laravel
+### Public website
+- Homepage with hero carousel, statistics, benefits, infrastructure section, services/solutions previews, blog insights, client reviews slider, and CTA
+- **Services** and **Solutions** listing and detail pages with SEO fields
+- **Blog** with categories, filtering, and article pages
+- **Data Centre** listing and per-facility detail pages (specs, features, gallery)
+- **About** and **Contact** pages
+- Embedded **Google Map** on contact page (admin-configurable map link)
+- Mega-menu navigation for Services, Solutions, and Blog
+- Auto-generated **sitemap.xml** and **robots.txt**
+- Responsive Nordic-themed UI with GSAP animations
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Admin panel (`/admin`)
+- Dashboard with content overview
+- **Company settings** — contact info, address, Google Maps link
+- **Branding** — logos and favicon upload
+- **Website settings** — SEO, GTM, language defaults
+- **Social links** management
+- **Homepage** — hero slides, intro, sustainability, infrastructure, benefits, statistics, final CTA
+- **About** page and company values
+- **Services** and **Solutions** CRUD with drag-and-drop image uploads
+- **Data Centres** — multiple facilities, specs, features, gallery
+- **Blog** — categories and posts
+- **Contact submissions** inbox
+- **Media library**
+- Admin profile and password change
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Tech stack
 
-## Agentic Development
+| Layer | Technology |
+|-------|------------|
+| Backend | PHP 8.3+, Laravel 13 |
+| Database | SQLite (default) — MySQL/MariaDB supported |
+| Frontend | Blade, Tailwind CSS 4, Alpine.js, GSAP, Lucide icons |
+| Build | Vite 7 |
+| Auth | Laravel session auth with admin middleware |
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
+
+## Requirements
+
+- **PHP** 8.3 or higher with extensions: `pdo`, `sqlite3` (or `pdo_mysql`), `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json`, `fileinfo`
+- **Composer** 2.x
+- **Node.js** 20+ and **npm** 10+
+- **Git**
+
+Optional for local development:
+- [Laravel Herd](https://herd.laravel.com) (Windows/macOS) — serves `https://rednteal.test` automatically
+- Or `php artisan serve` for `http://localhost:8000`
+
+---
+
+## Quick start
+
+### 1. Clone the repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repository-url> RedNTeal
+cd RedNTeal
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 2. Install PHP dependencies
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Environment configuration
 
-## Code of Conduct
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Edit `.env` and set at minimum:
 
-## Security Vulnerabilities
+```env
+APP_NAME=RedNTeal
+APP_URL=https://rednteal.test
+ADMIN_PASSWORD=your-secure-password
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+> Use `http://localhost:8000` if you run `php artisan serve` instead of Herd.
 
-## License
+### 4. Database setup
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+SQLite is used by default. Create the database file and run migrations with demo content:
+
+```bash
+# Windows (PowerShell)
+New-Item -ItemType File -Force -Path database\database.sqlite
+
+# macOS / Linux
+touch database/database.sqlite
+
+php artisan migrate:fresh --seed
+```
+
+This seeds:
+- Admin user, company & site settings
+- 12 services and 12 solutions with SEO content
+- 2 data centres (Oslo, Stockholm)
+- 20 blog posts across 5 categories
+- Homepage content, hero slides, testimonials, and more
+
+### 5. Storage link (required for admin uploads)
+
+```bash
+php artisan storage:link
+```
+
+### 6. Frontend assets
+
+**Production build:**
+
+```bash
+npm install
+npm run build
+```
+
+**Development (with hot reload):**
+
+```bash
+npm install
+npm run dev
+```
+
+### 7. Run the application
+
+**Option A — Laravel Herd (recommended)**
+
+Place the project in your Herd sites folder. Visit:
+
+```
+https://rednteal.test
+```
+
+**Option B — Artisan serve**
+
+```bash
+php artisan serve
+```
+
+Visit `http://localhost:8000`.
+
+**Option C — Full dev stack (server + queue + logs + Vite)**
+
+```bash
+composer dev
+```
+
+---
+
+## Default admin login
+
+| Field | Value |
+|-------|-------|
+| URL | `/admin/login` |
+| Email | `admin@example.com` |
+| Password | Value of `ADMIN_PASSWORD` in `.env` (default: `password`) |
+
+Change the admin password immediately after first login via **Admin → Profile**.
+
+---
+
+## Useful commands
+
+| Command | Description |
+|---------|-------------|
+| `php artisan migrate:fresh --seed` | Reset database and load demo data |
+| `php artisan storage:link` | Enable public access to uploaded files |
+| `php artisan sitemap:generate` | Regenerate `public/sitemap.xml` and `public/robots.txt` |
+| `php artisan cache:clear` | Clear application cache (settings are cached) |
+| `npm run build` | Compile production CSS/JS to `public/build/` |
+| `npm run dev` | Start Vite dev server with HMR |
+| `composer dev` | Run server, queue, logs, and Vite concurrently |
+| `php artisan test` | Run PHPUnit tests |
+
+---
+
+## Environment variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `APP_NAME` | Application name | `RedNTeal` |
+| `APP_URL` | Public site URL (used in sitemap) | `http://localhost` |
+| `APP_DEBUG` | Debug mode — set `false` in production | `true` |
+| `DB_CONNECTION` | Database driver | `sqlite` |
+| `ADMIN_PASSWORD` | Initial admin password for seeder | `password` |
+| `FILESYSTEM_DISK` | Upload disk | `local` |
+| `MAIL_*` | Mail settings for contact notifications | `log` driver in dev |
+
+For **MySQL**, update `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rednteal
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Then run `php artisan migrate:fresh --seed`.
+
+---
+
+## Project structure
+
+```
+RedNTeal/
+├── app/
+│   ├── Http/Controllers/     # Public & admin controllers
+│   ├── Models/               # Eloquent models
+│   ├── Services/             # Site settings, sitemap generator
+│   └── helpers.php           # settings(), logo_url(), favicon_url(), etc.
+├── database/
+│   ├── migrations/
+│   └── seeders/              # DatabaseSeeder, BlogSeeder, ServiceSolutionSeeder
+├── public/
+│   ├── Logo/                 # Static logo & favicon.ico
+│   ├── images/               # Hero, service, solution, blog images
+│   ├── build/                # Vite compiled assets
+│   ├── sitemap.xml
+│   └── robots.txt
+├── resources/
+│   ├── css/app.css
+│   ├── js/app.js             # Alpine components (carousel, reviews, uploads)
+│   └── views/                # Blade templates & components
+└── routes/web.php            # All public and admin routes
+```
+
+---
+
+## Public routes
+
+| URL | Page |
+|-----|------|
+| `/` | Homepage |
+| `/services` | Services listing |
+| `/services/{slug}` | Service detail |
+| `/solutions` | Solutions listing |
+| `/solutions/{slug}` | Solution detail |
+| `/data-centre` | Data centre listing |
+| `/data-centre/{slug}` | Facility detail |
+| `/blog` | Blog listing (optional `?category=slug`) |
+| `/blog/{slug}` | Blog article |
+| `/about` | About page |
+| `/contact` | Contact form + map |
+| `/admin` | Admin panel |
+
+---
+
+## Production deployment
+
+1. Set `APP_ENV=production`, `APP_DEBUG=false`, and correct `APP_URL`
+2. Run `composer install --no-dev --optimize-autoloader`
+3. Run `php artisan migrate --force` (omit `--seed` on production unless intentional)
+4. Run `php artisan storage:link`
+5. Run `npm ci && npm run build`
+6. Run `php artisan config:cache`, `php artisan route:cache`, `php artisan view:cache`
+7. Run `php artisan sitemap:generate`
+8. Ensure `storage/` and `bootstrap/cache/` are writable by the web server
+9. Point the web server document root to `public/`
+10. Set a strong `ADMIN_PASSWORD` before seeding, or change password after deploy
+
+---
+
+## Branding assets
+
+Static branding files live in `public/Logo/`:
+
+- `logo.png` — main logo
+- `favicon.ico` — site favicon (multi-size)
+
+Admins can override logos and favicon from **Admin → Settings → Branding**. Company map settings are under **Admin → Settings → Company**.
+
+---
+
+## Support & licensing
+
+**Developed by [VedMint](https://vedmint.com)**
+
+For support, customisation, or licensing enquiries, visit [https://vedmint.com](https://vedmint.com).
+
+**© VedMint. All rights reserved.**

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
     <title>Admin Login — RedNTeal CMS</title>
-    <link rel="icon" href="{{ favicon_url() }}" type="image/png">
+    @include('components.favicon')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased min-h-screen flex items-center justify-center p-4 bg-brand-50" x-data="{ showPassword: false }">

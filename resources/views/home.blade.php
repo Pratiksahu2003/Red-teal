@@ -102,17 +102,58 @@
 
 {{-- Infrastructure --}}
 @if($homepage->infrastructure_heading || $homepage->infrastructure_description)
-<section class="py-24 bg-brand-900 text-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+@php
+    $infraImage = hero_image_url($homepage->infrastructure_image, 'images/hero-slide-1.jpg');
+    $infraHighlights = [
+        ['icon' => 'shield-check', 'label' => 'Tier III+ Design', 'detail' => 'Concurrent maintainability'],
+        ['icon' => 'fingerprint', 'label' => 'Biometric Access', 'detail' => 'Multi-layer physical security'],
+        ['icon' => 'activity', 'label' => '24/7 NOC', 'detail' => 'Real-time facility monitoring'],
+        ['icon' => 'network', 'label' => '40+ Carriers', 'detail' => 'Carrier-neutral connectivity'],
+    ];
+@endphp
+<section class="relative py-20 lg:py-28 bg-brand-900 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-20">
+        <img src="{{ $infraImage }}" alt="" class="w-full h-full object-cover" aria-hidden="true">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-900 via-brand-900/95 to-brand-900/80"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
                 <p class="text-brand-teal-400 text-sm font-medium tracking-widest uppercase mb-4">Infrastructure</p>
                 <h2 class="font-display text-4xl lg:text-5xl mb-6">{{ $homepage->infrastructure_heading ?? 'Enterprise-Grade Facilities' }}</h2>
-                <div class="prose-content text-brand-300 text-lg">{!! rich_content($homepage->infrastructure_description) !!}</div>
+                <div class="prose-content text-brand-300 text-lg mb-8">{!! rich_content($homepage->infrastructure_description) !!}</div>
+
+                <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                    @foreach($infraHighlights as $item)
+                        <div class="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-4">
+                            <div class="w-9 h-9 rounded-lg bg-brand-teal-600/30 flex items-center justify-center mb-3">
+                                <i data-lucide="{{ $item['icon'] }}" class="w-4 h-4 text-brand-teal-300"></i>
+                            </div>
+                            <p class="font-semibold text-white text-sm">{{ $item['label'] }}</p>
+                            <p class="text-xs text-brand-400 mt-0.5">{{ $item['detail'] }}</p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-            @if($homepage->infrastructure_image)
-                <img src="{{ Storage::url($homepage->infrastructure_image) }}" alt="" class="rounded-2xl shadow-2xl w-full aspect-[4/3] object-cover">
-            @endif
+
+            <div class="relative">
+                <img
+                    src="{{ $infraImage }}"
+                    alt="{{ $homepage->infrastructure_heading ?? 'RedNTeal data centre infrastructure' }}"
+                    class="rounded-2xl shadow-2xl w-full aspect-[4/3] object-cover ring-1 ring-white/10"
+                >
+                <div class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-auto flex flex-wrap gap-2">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-teal-600 text-white text-sm font-medium shadow-lg">
+                        <i data-lucide="badge-check" class="w-4 h-4"></i>
+                        Tier III+ Certified
+                    </span>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-white text-sm font-medium border border-white/20">
+                        <i data-lucide="zap" class="w-4 h-4 text-brand-teal-300"></i>
+                        99.999% Uptime SLA
+                    </span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -223,6 +264,11 @@
         </div>
     </div>
 </section>
+@endif
+
+{{-- Client Reviews --}}
+@if($testimonials->count())
+    @include('components.reviews-slider', ['testimonials' => $testimonials])
 @endif
 
 {{-- Final CTA --}}

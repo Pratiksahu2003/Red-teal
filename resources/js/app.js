@@ -232,6 +232,57 @@ Alpine.data('heroCarousel', (slidesJson = '[]') => ({
     },
 }));
 
+Alpine.data('reviewsSlider', (reviewsJson = '[]') => ({
+    reviews: [],
+    active: 0,
+    timer: null,
+    duration: 6000,
+    init() {
+        try {
+            this.reviews = typeof reviewsJson === 'string' ? JSON.parse(reviewsJson) : reviewsJson;
+        } catch {
+            this.reviews = [];
+        }
+        if (this.reviews.length > 1) {
+            this.startAutoplay();
+        }
+    },
+    destroy() {
+        this.stopAutoplay();
+    },
+    current() {
+        return this.reviews[this.active] ?? {};
+    },
+    goTo(index) {
+        if (index < 0 || index >= this.reviews.length) return;
+        this.active = index;
+        this.resetAutoplay();
+    },
+    next() {
+        this.active = (this.active + 1) % this.reviews.length;
+        this.resetAutoplay();
+    },
+    prev() {
+        this.active = (this.active - 1 + this.reviews.length) % this.reviews.length;
+        this.resetAutoplay();
+    },
+    startAutoplay() {
+        this.stopAutoplay();
+        this.timer = setInterval(() => this.next(), this.duration);
+    },
+    stopAutoplay() {
+        if (this.timer) {
+            clearInterval(this.timer);
+            this.timer = null;
+        }
+    },
+    resetAutoplay() {
+        if (this.reviews.length > 1) {
+            this.startAutoplay();
+        }
+    },
+}));
+
 Alpine.start();
 
 document.addEventListener('DOMContentLoaded', () => {

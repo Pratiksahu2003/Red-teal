@@ -43,6 +43,10 @@ if (! function_exists('logo_url')) {
         $path = $paths[$variant] ?? $paths['default'];
 
         if ($path) {
+            if (str_starts_with($path, 'Logo/') || str_starts_with($path, 'images/')) {
+                return asset($path);
+            }
+
             return setting_url($path);
         }
 
@@ -53,11 +57,33 @@ if (! function_exists('logo_url')) {
 if (! function_exists('favicon_url')) {
     function favicon_url(): string
     {
-        if ($favicon = settings('branding.favicon')) {
-            return setting_url($favicon);
+        $favicon = settings('branding.favicon');
+
+        if (filled($favicon)) {
+            if (str_starts_with($favicon, 'http')) {
+                return $favicon;
+            }
+
+            if (str_starts_with($favicon, 'Logo/') || str_starts_with($favicon, 'images/')) {
+                return asset($favicon);
+            }
+
+            $storageUrl = setting_url($favicon);
+            if ($storageUrl) {
+                return $storageUrl;
+            }
         }
 
-        return asset('Logo/logo.png');
+        return asset('favicon.ico');
+    }
+}
+
+if (! function_exists('favicon_type')) {
+    function favicon_type(): string
+    {
+        $path = strtolower(parse_url(favicon_url(), PHP_URL_PATH) ?? '');
+
+        return str_ends_with($path, '.ico') ? 'image/x-icon' : 'image/png';
     }
 }
 
@@ -93,5 +119,55 @@ if (! function_exists('rich_content')) {
         }
 
         return nl2br(e($content));
+    }
+}
+
+if (! function_exists('company_map_link')) {
+    function company_map_link(): ?string
+    {
+        $link = settings('company.map_link');
+        if (filled($link)) {
+            return $link;
+        }
+
+        $parts = array_filter([
+            settings('company.address'),
+            settings('company.city'),
+            settings('company.postal_code'),
+            settings('company.country'),
+        ]);
+
+        if (empty($parts)) {
+            return null;
+        }
+
+        return 'https://www.google.com/maps/search/?api=1&query='.urlencode(implode(', ', $parts));
+    }
+}
+
+if (! function_exists('company_map_embed_url')) {
+    function company_map_embed_url(): ?string
+    {
+        $embed = settings('company.map_embed_url');
+        if (filled($embed)) {
+            return $embed;
+        }
+
+        $link = company_map_link();
+        if (blank($link)) {
+            return null;
+        }
+
+        if (str_contains($link, '/maps/embed')) {
+            return $link;
+        }
+
+        if (str_contains($link, 'google.com/maps') || str_contains($link, 'maps.google.com')) {
+            $separator = str_contains($link, '?') ? '&' : '?';
+
+            return $link.$separator.'output=embed';
+        }
+
+        return 'https://www.google.com/maps?q='.urlencode($link).'&output=embed';
     }
 }

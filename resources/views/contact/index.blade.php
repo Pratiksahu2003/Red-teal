@@ -3,6 +3,10 @@
 @section('title', 'Contact — ' . (settings('company.company_name') ?? 'RedNTeal'))
 
 @section('content')
+@php
+    $mapLink = company_map_link();
+    $mapEmbed = company_map_embed_url();
+@endphp
 <x-page-hero fallback="images/hero-slide-2.jpg" alt="Contact RedNTeal" size="md">
     <p class="text-brand-teal-400 text-sm font-medium tracking-widest uppercase mb-3">Get in Touch</p>
     <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl mb-4">Contact Us</h1>
@@ -54,6 +58,12 @@
                                     {{ settings('company.city') }}@if(settings('company.postal_code')), {{ settings('company.postal_code') }}@endif<br>
                                     {{ settings('company.country') }}
                                 </p>
+                                @if($mapLink)
+                                    <a href="{{ $mapLink }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-brand-teal-700 hover:text-brand-teal-600 transition">
+                                        <i data-lucide="map" class="w-4 h-4"></i>
+                                        Open in Google Maps
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     @endif
@@ -134,4 +144,35 @@
         </div>
     </div>
 </section>
+
+@if($mapEmbed)
+<section class="pb-24 bg-brand-50 border-t border-brand-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
+            <div>
+                <p class="text-brand-teal-600 text-sm font-medium tracking-widest uppercase mb-2">Location</p>
+                <h2 class="font-display text-3xl text-brand-900">Visit Our Office</h2>
+                <p class="text-brand-600 mt-2">Find us on the map or get directions to our headquarters.</p>
+            </div>
+            @if($mapLink)
+                <a href="{{ $mapLink }}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-brand-200 text-brand-teal-700 font-medium rounded-full hover:bg-brand-teal-50 hover:border-brand-teal-200 transition shrink-0">
+                    <i data-lucide="navigation" class="w-4 h-4"></i>
+                    Get Directions
+                </a>
+            @endif
+        </div>
+
+        <div class="rounded-2xl overflow-hidden border border-brand-200 shadow-lg bg-white">
+            <iframe
+                src="{{ $mapEmbed }}"
+                title="RedNTeal office location map"
+                class="w-full h-[320px] sm:h-[400px] lg:h-[480px] border-0"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+        </div>
+    </div>
+</section>
+@endif
 @endsection

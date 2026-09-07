@@ -32,6 +32,8 @@ class CompanySettingController extends Controller
             'state' => 'nullable|string|max:100',
             'country' => 'nullable|string|max:100',
             'postal_code' => 'nullable|string|max:20',
+            'map_link' => 'nullable|url|max:2000',
+            'map_embed_url' => 'nullable|url|max:2000',
             'founded_year' => 'nullable|string|max:10',
             'vat_number' => 'nullable|string|max:50',
             'business_registration_number' => 'nullable|string|max:50',

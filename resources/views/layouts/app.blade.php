@@ -8,7 +8,7 @@
     <meta name="description" content="@yield('meta_description', settings('website.default_meta_description') ?? '')">
     <meta name="keywords" content="{{ settings('website.default_keywords') ?? '' }}">
     <meta property="og:image" content="{{ settings('website.og_image') ? setting_url(settings('website.og_image')) : logo_url() }}">
-    <link rel="icon" href="{{ favicon_url() }}" type="image/png">
+    @include('components.favicon')
     @if(settings('website.google_tag_manager_id'))
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','{{ settings('website.google_tag_manager_id') }}');</script>
     @endif

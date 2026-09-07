@@ -41,6 +41,26 @@
             @include('admin.components.input', ['name' => 'postal_code', 'label' => 'Postal Code', 'value' => $company->postal_code])
         </div>
 
+        <h3 class="font-medium text-brand-900">Map</h3>
+        <p class="text-sm text-brand-500 -mt-2">Shown on the contact page. Paste a Google Maps share link or embed URL.</p>
+        <div class="space-y-4">
+            @include('admin.components.input', [
+                'name' => 'map_link',
+                'label' => 'Google Maps Link',
+                'value' => $company->map_link,
+                'type' => 'url',
+                'placeholder' => 'https://www.google.com/maps/place/...',
+            ])
+            @include('admin.components.input', [
+                'name' => 'map_embed_url',
+                'label' => 'Map Embed URL (optional)',
+                'value' => $company->map_embed_url,
+                'type' => 'url',
+                'placeholder' => 'https://www.google.com/maps/embed?pb=...',
+            ])
+            <p class="text-xs text-brand-500">Leave embed URL blank to auto-generate from the Google Maps link. In Google Maps, use <strong>Share → Embed a map</strong> to copy the iframe <code class="text-brand-700">src</code> URL.</p>
+        </div>
+
         <hr class="border-brand-200">
 
         <h3 class="font-medium text-brand-900">Legal Information</h3>

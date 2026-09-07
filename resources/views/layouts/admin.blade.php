@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#921a1d">
     <title>@yield('title', 'Admin') — {{ settings('company.company_name') ?? 'RedNTeal' }} CMS</title>
-    <link rel="icon" href="{{ favicon_url() }}" type="image/png">
+    @include('components.favicon')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans bg-white text-brand-800 antialiased" x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false">
