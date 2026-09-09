@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'category' => 'Enterprise Security',
-                'title' => 'ISO 27001 Certified with Tier III+ Architecture',
+                'title' => 'Tier III+ Architecture with Defense-in-Depth Security',
                 'description' => 'Biometric access, 24/7 NOC monitoring, and multi-layer physical security protect your most critical workloads around the clock.',
                 'image' => 'images/hero-slide-4.jpg',
                 'cta_text' => 'Read More',
@@ -155,7 +155,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Renewable Energy', 'description' => 'Every facility powered by certified hydro, wind, and solar generation.', 'icon' => 'leaf', 'sort_order' => 1],
             ['title' => 'Nordic Reliability', 'description' => 'Cool climate reduces cooling costs and enables industry-leading PUE ratings.', 'icon' => 'snowflake', 'sort_order' => 2],
             ['title' => 'Carrier Neutral', 'description' => 'Connect to 40+ carriers and cloud on-ramps from a single cross-connect.', 'icon' => 'network', 'sort_order' => 3],
-            ['title' => 'Enterprise Security', 'description' => 'ISO 27001 certified with multi-layer physical and cyber security.', 'icon' => 'shield-check', 'sort_order' => 4],
+            ['title' => 'Enterprise Security', 'description' => 'Multi-layer physical and cyber security protecting your most critical workloads.', 'icon' => 'shield-check', 'sort_order' => 4],
         ];
 
         foreach ($benefits as $benefit) {
@@ -241,7 +241,7 @@ class DatabaseSeeder extends Seeder
             ['title' => 'Energy', 'slug' => 'energy', 'description' => '100% certified hydroelectric power with real-time carbon reporting and renewable energy certificates for every kWh consumed.', 'icon' => 'zap', 'sort_order' => 1],
             ['title' => 'Cooling', 'slug' => 'cooling', 'description' => 'Hybrid free-air and chilled water cooling systems optimised for Nordic climate, achieving PUE as low as 1.12.', 'icon' => 'snowflake', 'sort_order' => 2],
             ['title' => 'Connectivity', 'slug' => 'connectivity', 'description' => 'Carrier-neutral meet-me room with 42 network providers, direct cloud on-ramps, and sub-5ms latency to major European hubs.', 'icon' => 'network', 'sort_order' => 3],
-            ['title' => 'Security', 'slug' => 'security', 'description' => 'ISO 27001 certified with biometric access, 24/7 CCTV, mantrap entries, and on-site security personnel.', 'icon' => 'shield-check', 'sort_order' => 4],
+            ['title' => 'Security', 'slug' => 'security', 'description' => 'Multi-layer physical security with biometric access, 24/7 CCTV, mantrap entries, and on-site security personnel.', 'icon' => 'shield-check', 'sort_order' => 4],
             ['title' => 'Scalability', 'slug' => 'scalability', 'description' => 'Modular hall design allows expansion from single racks to 500-rack deployments without service interruption.', 'icon' => 'maximize-2', 'sort_order' => 5],
             ['title' => 'Location', 'slug' => 'location', 'description' => 'Strategically positioned in Oslo with excellent fibre infrastructure, political stability, and access to skilled technical workforce.', 'icon' => 'map-pin', 'sort_order' => 6],
         ];

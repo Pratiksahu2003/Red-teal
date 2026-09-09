@@ -17,7 +17,7 @@ class BlogSeeder extends Seeder
             ['name' => 'Data Centre Insights', 'slug' => 'data-centre-insights', 'description' => 'Facility design, operations, and Nordic infrastructure trends.', 'sort_order' => 1],
             ['name' => 'Sustainability', 'slug' => 'sustainability', 'description' => 'Renewable energy, PUE optimisation, and green data centre practices.', 'sort_order' => 2],
             ['name' => 'Cloud & Connectivity', 'slug' => 'cloud-connectivity', 'description' => 'Hybrid cloud, cross-connects, and carrier-neutral networking.', 'sort_order' => 3],
-            ['name' => 'Security & Compliance', 'slug' => 'security-compliance', 'description' => 'ISO standards, physical security, and regulatory readiness.', 'sort_order' => 4],
+            ['name' => 'Security & Compliance', 'slug' => 'security-compliance', 'description' => 'Security frameworks, physical security, and regulatory readiness.', 'sort_order' => 4],
             ['name' => 'Industry News', 'slug' => 'industry-news', 'description' => 'Market updates and VDC800 announcements from across Northern Europe.', 'sort_order' => 5],
         ];
 
@@ -30,7 +30,7 @@ class BlogSeeder extends Seeder
             ['Understanding Tier III+ Architecture in Nordic Facilities', 0],
             ['How Free-Air Cooling Cuts Data Centre Energy Use', 0],
             ['Direct Cloud On-Ramps: AWS, Azure and Google Cloud', 2],
-            ['ISO 27001 Certification: What It Means for Your Workloads', 3],
+            ['Security Compliance: What It Means for Your Workloads', 3],
             ['Oslo DC-1 Expansion Adds 15MW Renewable Capacity', 4],
             ['PUE Benchmarks: Comparing Nordic vs European Averages', 0],
             ['100% Renewable Energy Matching Explained', 1],

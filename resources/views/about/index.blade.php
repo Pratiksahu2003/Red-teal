@@ -104,7 +104,7 @@
                 </div>
                 <div class="bg-brand-800 rounded-2xl p-6 text-center">
                     <i data-lucide="award" class="w-8 h-8 text-brand-teal-400 mx-auto mb-3"></i>
-                    <p class="font-medium">ISO Certified</p>
+                    <p class="font-medium">Security Assured</p>
                 </div>
             </div>
         </div>

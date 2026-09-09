@@ -10,7 +10,7 @@
 @endphp
 
 <section
-    class="relative text-white min-h-[calc(100vh-4.5rem)] lg:min-h-[calc(100vh-5rem)] flex flex-col overflow-hidden -mt-px"
+    class="relative text-white min-h-[calc(100vh-4.75rem)] lg:min-h-[calc(100vh-5rem)] flex flex-col overflow-hidden -mt-px"
     x-data="heroCarousel(@js($slidesData))"
     @mouseenter="stopAutoplay()"
     @mouseleave="slides.length > 1 && startAutoplay()"

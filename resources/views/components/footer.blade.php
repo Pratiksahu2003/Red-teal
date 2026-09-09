@@ -1,13 +1,13 @@
 <footer class="bg-white border-t border-brand-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {{-- Brand --}}
-        <div class="pb-6 border-b border-brand-100">
+        <div class="pb-10 lg:pb-12 border-b border-brand-100">
             <div class="min-w-0">
-                <x-logo class="h-8 w-auto mb-2" />
-                <p class="text-brand-teal-600 font-medium text-sm">{{ settings('company.tagline') ?? 'IS FUTURE OF DCs' }}</p>
-                <p class="text-brand-500 text-sm mt-1 max-w-lg leading-snug">{{ Str::limit(settings('company.description'), 140) }}</p>
+                <x-logo class="h-12 lg:h-14 w-auto max-w-none mb-4" />
+                <p class="text-brand-teal-600 font-medium text-sm lg:text-base">{{ settings('company.tagline') ?? 'IS FUTURE OF DCs' }}</p>
+                <p class="text-brand-500 text-sm lg:text-base mt-2 max-w-lg leading-relaxed">{{ Str::limit(settings('company.description'), 140) }}</p>
                 @if(count(settings('social_links') ?? []) > 0)
-                    <div class="flex flex-wrap gap-1.5 mt-3">
+                    <div class="flex flex-wrap gap-2 mt-5">
                         @foreach(settings('social_links') ?? [] as $link)
                             @if($link['is_active'] ?? false)
                                 <a href="{{ $link['url'] }}" target="_blank" rel="noopener noreferrer" title="{{ $link['platform'] }}"
@@ -22,10 +22,10 @@
         </div>
 
         {{-- Link columns --}}
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 pt-6">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pt-10 lg:pt-12">
             <div>
-                <h4 class="text-brand-900 font-bold text-sm mb-2.5">Company</h4>
-                <ul class="space-y-1.5">
+                <h4 class="text-brand-900 font-bold text-sm lg:text-base mb-3">Company</h4>
+                <ul class="space-y-2">
                     @foreach([
                         ['label' => 'Home', 'url' => route('home')],
                         ['label' => 'About Us', 'url' => route('about.index')],
@@ -43,8 +43,8 @@
             </div>
 
             <div>
-                <h4 class="text-brand-900 font-bold text-sm mb-2.5">Services</h4>
-                <ul class="space-y-1.5">
+                <h4 class="text-brand-900 font-bold text-sm lg:text-base mb-3">Services</h4>
+                <ul class="space-y-2">
                     @forelse($footerServices ?? [] as $service)
                         <li>
                             <a href="{{ route('services.show', $service) }}" class="text-sm text-brand-600 hover:text-brand-red-500 transition">{{ $service->title }}</a>
@@ -60,8 +60,8 @@
             </div>
 
             <div>
-                <h4 class="text-brand-900 font-bold text-sm mb-2.5">Solutions</h4>
-                <ul class="space-y-1.5">
+                <h4 class="text-brand-900 font-bold text-sm lg:text-base mb-3">Solutions</h4>
+                <ul class="space-y-2">
                     @forelse($footerSolutions ?? [] as $solution)
                         <li>
                             <a href="{{ route('solutions.show', $solution) }}" class="text-sm text-brand-600 hover:text-brand-red-500 transition">{{ $solution->title }}</a>
@@ -77,8 +77,8 @@
             </div>
 
             <div>
-                <h4 class="text-brand-900 font-bold text-sm mb-2.5">Contact</h4>
-                <ul class="space-y-2">
+                <h4 class="text-brand-900 font-bold text-sm lg:text-base mb-3">Contact</h4>
+                <ul class="space-y-2.5">
                     @if(settings('company.address') || settings('company.city'))
                         <li class="flex items-start gap-2 text-sm text-brand-600">
                             <i data-lucide="map-pin" class="w-3.5 h-3.5 text-brand-red-500 shrink-0 mt-0.5"></i>
@@ -115,7 +115,7 @@
         </div>
 
         {{-- Sitemap --}}
-        <div id="sitemap" class="mt-6 pt-5 border-t border-brand-100 scroll-mt-24">
+        <div id="sitemap" class="mt-10 lg:mt-12 pt-8 border-t border-brand-100 scroll-mt-24">
             <div class="flex items-center justify-between gap-4 mb-2">
                 <h4 class="text-brand-900 font-bold text-xs uppercase tracking-wide">Quick Sitemap</h4>
                 <a href="{{ route('legal.sitemap') }}" class="text-xs font-semibold text-brand-red-500 hover:text-brand-red-600 transition">View full sitemap</a>
@@ -148,7 +148,7 @@
 
     {{-- Sub-footer --}}
     <div class="border-t border-brand-200 bg-brand-50/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 lg:py-6">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs sm:text-sm">
                 <div class="text-center sm:text-left">
                     <p class="text-brand-700">

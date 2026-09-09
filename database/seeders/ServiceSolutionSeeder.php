@@ -400,10 +400,10 @@ class ServiceSolutionSeeder extends Seeder
                 'compliance-audit-readiness',
                 'Security & Compliance',
                 'file-check',
-                'Control mapping, evidence packs, and auditor liaison for GDPR, ISO 27001, PCI DSS, and NIS2 programmes.',
-                ['compliance hosting', 'audit readiness', 'GDPR infrastructure', 'ISO 27001 colocation'],
+                'Control mapping, evidence packs, and auditor liaison for GDPR, PCI DSS, and NIS2 programmes.',
+                ['compliance hosting', 'audit readiness', 'GDPR infrastructure', 'audit-ready colocation'],
                 [
-                    ['Frameworks', 'ISO, PCI, NIS2, GDPR', 'Faster audit cycles', 'Pre-mapped controls'],
+                    ['Frameworks', 'SOC 2, PCI, NIS2, GDPR', 'Faster audit cycles', 'Pre-mapped controls'],
                     ['Evidence', 'Policy & test artefacts', 'Reduce questionnaire fatigue', 'Portal downloads'],
                     ['Data residency', 'EU/EEA facilities', 'Regulatory alignment', 'No unexpected transfers'],
                     ['Auditor support', 'Dedicated liaison', 'Shorter audit duration', 'Clarification SLAs'],

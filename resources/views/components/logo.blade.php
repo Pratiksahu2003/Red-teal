@@ -1,6 +1,6 @@
 @props([
     'variant' => 'default',
-    'class' => 'h-10 lg:h-12 w-auto',
+    'class' => 'h-12 lg:h-14 w-auto max-w-none',
     'link' => true,
 ])
 
@@ -12,11 +12,11 @@
 
 @if($link)
     <a href="{{ route('home') }}" {{ $attributes->merge(['class' => 'flex items-center gap-3 shrink-0']) }}>
-        <img src="{{ $url }}" alt="{{ $alt }}" class="{{ $class }} object-contain">
+        <img src="{{ $url }}" alt="{{ $alt }}" class="{{ $class }} object-contain object-left">
         @if($slot->isNotEmpty())
             {{ $slot }}
         @endif
     </a>
 @else
-    <img src="{{ $url }}" alt="{{ $alt }}" {{ $attributes->merge(['class' => $class . ' object-contain']) }}>
+    <img src="{{ $url }}" alt="{{ $alt }}" {{ $attributes->merge(['class' => $class . ' object-contain object-left']) }}>
 @endif

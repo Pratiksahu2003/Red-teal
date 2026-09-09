@@ -41,7 +41,7 @@ class LongFormSeoContent
         $html .= self::section(
             'Security, compliance, and operational assurance',
             self::paragraphs($title, $category, [
-                "Physical security layers include perimeter controls, mantraps, biometric access, continuous CCTV, and visitor escort policies. Logical controls for {$title} complement physical measures with role-based portal access, MFA enforcement, and tamper-evident logging suitable for ISO 27001 and SOC 2 examinations.",
+                "Physical security layers include perimeter controls, mantraps, biometric access, continuous CCTV, and visitor escort policies. Logical controls for {$title} complement physical measures with role-based portal access, MFA enforcement, and tamper-evident logging suitable for SOC 2 and recognised security framework examinations.",
                 "Compliance support packages provide control mapping templates, evidence collection cadences, and liaison during external audits. Financial services, healthcare, and public-sector clients rely on these artefacts to demonstrate that {$category} infrastructure meets jurisdictional requirements across the EU and EEA.",
                 "Incident response integrates with your major incident process: severity classification, stakeholder notifications, root-cause analysis, and corrective action tracking. Tabletop exercises for {$title} scenarios—utility failure, fibre cut, firmware vulnerability—are offered annually.",
                 "Supply chain integrity covers hardware receiving, anti-tamper seals, secure staging, and documented chain-of-custody when equipment moves between loading bays and production halls.",
@@ -97,7 +97,7 @@ class LongFormSeoContent
         $html .= self::section(
             'Governance, risk, and compliance alignment',
             self::paragraphs($title, 'vertical solutions', [
-                "Control libraries map facility and managed services controls to frameworks commonly referenced in {$title}, including GDPR, NIS2, ISO 27001, and sector-specific annexes. Evidence packs accelerate audits by pre-indexing policies, penetration test summaries, and change records.",
+                "Control libraries map facility and managed services controls to frameworks commonly referenced in {$title}, including GDPR, NIS2, SOC 2, and sector-specific annexes. Evidence packs accelerate audits by pre-indexing policies, penetration test summaries, and change records.",
                 "Third-party risk assessments receive structured responses covering sub-processor lists, data flow diagrams, and business continuity test results. Legal and procurement teams gain predictable documentation instead of bespoke questionnaires for every review cycle.",
                 "Privacy-by-design workshops identify data minimisation opportunities, pseudonymisation strategies, and retention schedules that reduce long-term liability while preserving analytical value.",
             ])
@@ -147,7 +147,7 @@ class LongFormSeoContent
     private static function serviceIntro(string $title, string $category, string $keywords): string
     {
         return <<<HTML
-<p><strong>{$title}</strong> from VDC800 delivers enterprise-grade {$category} from sustainable Nordic data centres engineered for 99.999% availability, ISO 27001-aligned security, and 100% renewable power matching. This comprehensive guide explains how we design, deploy, and operate {$title} for organisations that cannot compromise on resilience, compliance, or climate accountability.</p>
+<p><strong>{$title}</strong> from VDC800 delivers enterprise-grade {$category} from sustainable Nordic data centres engineered for 99.999% availability, enterprise-grade security controls, and 100% renewable power matching. This comprehensive guide explains how we design, deploy, and operate {$title} for organisations that cannot compromise on resilience, compliance, or climate accountability.</p>
 <p>Whether you are consolidating legacy footprints, launching latency-sensitive platforms, or expanding hybrid cloud estates, our specialists align {$keywords} with measurable business outcomes. The following sections cover architecture, SLAs, security controls, sustainability metrics, and a practical deployment playbook you can share with technical and executive stakeholders.</p>
 HTML;
     }
@@ -302,7 +302,7 @@ HTML;
 <h3>Do you support hybrid cloud for {$kw}?</h3>
 <p>Yes. Carrier-neutral meet-me rooms provide direct on-ramps to major public clouds and private links to corporate SD-WAN hubs, reducing reliance on unpredictable internet transit paths.</p>
 <h3>What compliance artefacts are included?</h3>
-<p>Customers receive SOC reports, ISO certificates, control matrices, and sub-processor documentation. Tailored packs for GDPR, PCI DSS, or sector regulators can be assembled with professional services.</p>
+<p>Customers receive SOC reports, compliance certificates, control matrices, and sub-processor documentation. Tailored packs for GDPR, PCI DSS, or sector regulators can be assembled with professional services.</p>
 <h3>Can we scale power without migrating sites?</h3>
 <p>Modular hall design and reserved busway capacity enable in-place upgrades for many deployments, preserving operational familiarity and avoiding costly relocation projects.</p>
 <h3>How is environmental impact reported?</h3>

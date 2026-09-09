@@ -1,7 +1,7 @@
 <nav x-data="{ open: false, servicesMenu: false, solutionsMenu: false, blogMenu: false, mobileServicesOpen: false, mobileSolutionsOpen: false, mobileBlogOpen: false }" @keydown.escape.window="open = false; servicesMenu = false; solutionsMenu = false; blogMenu = false" class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-brand-200 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16 lg:h-[4.5rem]">
-            <x-logo class="h-9 lg:h-11 w-auto" />
+        <div class="flex items-center justify-between h-[4.75rem] lg:h-20">
+            <x-logo class="h-14 lg:h-16 w-auto max-w-none" />
 
             <div class="hidden lg:flex items-center gap-6 xl:gap-8">
                 <a href="{{ route('home') }}" class="text-sm font-medium {{ request()->routeIs('home') ? 'text-brand-red-500' : 'text-brand-600 hover:text-brand-teal-600' }} transition">Home</a>
@@ -231,8 +231,8 @@
         </div>
     </div>
 
-    <div x-show="open" x-cloak x-transition class="lg:hidden fixed inset-0 top-16 bg-brand-900/30 backdrop-blur-sm z-40" @click="open = false"></div>
-    <div x-show="open" x-cloak x-transition class="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-200 shadow-lg z-50 max-h-[calc(100vh-4rem)] overflow-y-auto">
+    <div x-show="open" x-cloak x-transition class="lg:hidden fixed inset-0 top-[4.75rem] bg-brand-900/30 backdrop-blur-sm z-40" @click="open = false"></div>
+    <div x-show="open" x-cloak x-transition class="lg:hidden absolute top-full left-0 right-0 bg-white border-b border-brand-200 shadow-lg z-50 max-h-[calc(100vh-4.75rem)] overflow-y-auto">
         <div class="px-4 py-6 space-y-1">
             <a href="{{ route('home') }}" class="block text-brand-700 font-medium py-2.5 hover:text-brand-red-500">Home</a>
 
