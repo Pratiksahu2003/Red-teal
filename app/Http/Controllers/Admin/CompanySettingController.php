@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CompanySetting;
+use App\Services\MapUrlResolver;
 use App\Services\SiteSettingsService;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class CompanySettingController extends Controller
         ]);
     }
 
-    public function update(Request $request, SiteSettingsService $settings)
+    public function update(Request $request, SiteSettingsService $settings, MapUrlResolver $mapUrlResolver)
     {
         $validated = $request->validate([
             'company_name' => 'nullable|string|max:255',
@@ -32,12 +33,22 @@ class CompanySettingController extends Controller
             'state' => 'nullable|string|max:100',
             'country' => 'nullable|string|max:100',
             'postal_code' => 'nullable|string|max:20',
-            'map_link' => 'nullable|url|max:2000',
-            'map_embed_url' => 'nullable|url|max:2000',
+            'map_link' => 'nullable|string|max:2000',
             'founded_year' => 'nullable|string|max:10',
             'vat_number' => 'nullable|string|max:50',
             'business_registration_number' => 'nullable|string|max:50',
         ]);
+
+        $normalizedMapLink = $mapUrlResolver->normalizeInput($validated['map_link'] ?? null);
+
+        if (filled($validated['map_link'] ?? null) && blank($normalizedMapLink)) {
+            return back()
+                ->withInput()
+                ->withErrors(['map_link' => 'Please enter a valid Google Maps link.']);
+        }
+
+        $validated['map_link'] = $normalizedMapLink;
+        $validated['map_embed_url'] = null;
 
         CompanySetting::instance()->update($validated);
         $settings->clearCache();

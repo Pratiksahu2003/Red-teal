@@ -15,7 +15,7 @@
         <div class="text-center max-w-2xl mx-auto mb-12">
             <p class="text-brand-teal-600 text-sm font-medium tracking-widest uppercase mb-2">Client Stories</p>
             <h2 class="font-display text-4xl text-brand-900 mb-3">Trusted Across India &amp; Europe</h2>
-            <p class="text-brand-600">What technology leaders say about partnering with RedNTeal for sustainable Nordic infrastructure.</p>
+            <p class="text-brand-600">What technology leaders say about partnering with VDC800 for sustainable Nordic infrastructure.</p>
         </div>
 
         <template x-if="reviews.length">

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ffffff">
-    <title>Admin Login — RedNTeal CMS</title>
+    <title>Admin Login — VDC800 CMS</title>
     @include('components.favicon')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -15,7 +15,7 @@
                 <x-logo :link="false" class="h-14 w-auto mx-auto" />
             </div>
             <h1 class="text-2xl font-semibold text-brand-900">Admin Dashboard</h1>
-            <p class="text-brand-teal-600 text-sm mt-1">Technology You Can Trust</p>
+            <p class="text-brand-teal-600 text-sm mt-1">{{ settings('company.tagline') ?? 'IS FUTURE OF DCs' }}</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm p-8 border border-brand-200">
@@ -66,7 +66,7 @@
             </form>
         </div>
 
-        <p class="text-center text-brand-500 text-xs mt-6">&copy; {{ date('Y') }} RedNTeal. All rights reserved.</p>
+        <p class="text-center text-brand-500 text-xs mt-6">&copy; {{ date('Y') }} VDC800. All rights reserved.</p>
     </div>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#921a1d">
-    <title>@yield('title', 'Admin') — {{ settings('company.company_name') ?? 'RedNTeal' }} CMS</title>
+    <meta name="theme-color" content="#8cc63f">
+    <title>@yield('title', 'Admin') — {{ settings('company.company_name') ?? 'VDC800' }} CMS</title>
     @include('components.favicon')
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>

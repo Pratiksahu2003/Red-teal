@@ -28,14 +28,14 @@
         </div>
     </x-page-hero>
 
-    <section class="py-12 lg:py-16">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-10 sm:py-12 lg:py-16">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 min-w-0">
             @if($post->excerpt)
-                <p class="text-lg text-brand-700 font-medium mb-8 leading-relaxed border-l-4 border-brand-teal-500 pl-4">{{ $post->excerpt }}</p>
+                <p class="text-base sm:text-lg text-brand-700 font-medium mb-8 leading-relaxed border-l-4 border-brand-teal-500 pl-4">{{ $post->excerpt }}</p>
             @endif
-            <div class="prose-content blog-content text-brand-700 text-lg leading-relaxed">
+            <x-cms-content class="text-brand-700 text-base sm:text-lg leading-relaxed">
                 {!! rich_content($post->body) !!}
-            </div>
+            </x-cms-content>
         </div>
     </section>
 

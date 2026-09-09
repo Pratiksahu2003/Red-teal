@@ -1,6 +1,6 @@
-# RedNTeal — Sustainable Nordic Data Centres
+# VDC800 — Sustainable Nordic Data Centres
 
-A full-stack marketing website and content management system for **RedNTeal Data Centres**. Built with Laravel 13, Tailwind CSS 4, Alpine.js, and GSAP. Includes a public-facing site with mega-menu navigation, blog, data centre listings, contact forms with maps, and a complete admin panel to manage all content.
+A full-stack marketing website and content management system for **VDC800 Data Centres**. Built with Laravel 13, Tailwind CSS 4, Alpine.js, and GSAP. Includes a public-facing site with mega-menu navigation, blog, data centre listings, contact forms with maps, and a complete admin panel to manage all content.
 
 **Copyright © [VedMint](https://vedmint.com). All rights reserved.**
 
@@ -58,7 +58,7 @@ This project is proprietary software. Unauthorized copying, distribution, or mod
 - **Git**
 
 Optional for local development:
-- [Laravel Herd](https://herd.laravel.com) (Windows/macOS) — serves `https://rednteal.test` automatically
+- [Laravel Herd](https://herd.laravel.com) (Windows/macOS) — serves `https://VDC800.test` automatically
 - Or `php artisan serve` for `http://localhost:8000`
 
 ---
@@ -68,8 +68,8 @@ Optional for local development:
 ### 1. Clone the repository
 
 ```bash
-git clone <repository-url> RedNTeal
-cd RedNTeal
+git clone <repository-url> VDC800
+cd VDC800
 ```
 
 ### 2. Install PHP dependencies
@@ -88,8 +88,8 @@ php artisan key:generate
 Edit `.env` and set at minimum:
 
 ```env
-APP_NAME=RedNTeal
-APP_URL=https://rednteal.test
+APP_NAME=VDC800
+APP_URL=https://VDC800.test
 ADMIN_PASSWORD=your-secure-password
 ```
 
@@ -145,7 +145,7 @@ npm run dev
 Place the project in your Herd sites folder. Visit:
 
 ```
-https://rednteal.test
+https://VDC800.test
 ```
 
 **Option B — Artisan serve**
@@ -195,7 +195,7 @@ Change the admin password immediately after first login via **Admin → Profile*
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `APP_NAME` | Application name | `RedNTeal` |
+| `APP_NAME` | Application name | `VDC800` |
 | `APP_URL` | Public site URL (used in sitemap) | `http://localhost` |
 | `APP_DEBUG` | Debug mode — set `false` in production | `true` |
 | `DB_CONNECTION` | Database driver | `sqlite` |
@@ -209,7 +209,7 @@ For **MySQL**, update `.env`:
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=rednteal
+DB_DATABASE=VDC800
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -221,7 +221,7 @@ Then run `php artisan migrate:fresh --seed`.
 ## Project structure
 
 ```
-RedNTeal/
+VDC800/
 ├── app/
 │   ├── Http/Controllers/     # Public & admin controllers
 │   ├── Models/               # Eloquent models

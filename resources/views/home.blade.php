@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', settings('website.default_page_title') ?? settings('company.company_name') ?? 'RedNTeal')
+@section('title', settings('website.default_page_title') ?? settings('company.company_name') ?? 'VDC800')
 
 @section('content')
 @include('components.hero-carousel', ['heroSlides' => $heroSlides])
@@ -36,7 +36,7 @@
             <div class="relative">
                 <img
                     src="{{ $homepage->intro_image ? Storage::url($homepage->intro_image) : asset('images/data-centre-facility.jpg') }}"
-                    alt="{{ $homepage->intro_heading ?? 'RedNTeal data centre' }}"
+                    alt="{{ $homepage->intro_heading ?? 'VDC800 data centre' }}"
                     class="rounded-2xl shadow-2xl w-full aspect-[4/3] object-cover"
                 >
                 <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-brand-teal-600/20 rounded-2xl -z-10"></div>
@@ -52,7 +52,7 @@
 <section class="py-24 bg-brand-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16">
-            <h2 class="font-display text-4xl text-brand-900 mb-4">Why RedNTeal</h2>
+            <h2 class="font-display text-4xl text-brand-900 mb-4">Why VDC800</h2>
             <p class="text-brand-600">Sustainable infrastructure designed for enterprise performance and environmental responsibility.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -140,7 +140,7 @@
             <div class="relative">
                 <img
                     src="{{ $infraImage }}"
-                    alt="{{ $homepage->infrastructure_heading ?? 'RedNTeal data centre infrastructure' }}"
+                    alt="{{ $homepage->infrastructure_heading ?? 'VDC800 data centre infrastructure' }}"
                     class="rounded-2xl shadow-2xl w-full aspect-[4/3] object-cover ring-1 ring-white/10"
                 >
                 <div class="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-auto flex flex-wrap gap-2">
@@ -278,7 +278,7 @@
             {{ $homepage->final_cta_heading ?? 'Ready to build sustainably?' }}
         </h2>
         <p class="text-base text-brand-600 mb-5 max-w-2xl mx-auto leading-relaxed">
-            {{ $homepage->final_cta_description ?? 'Partner with RedNTeal for Nordic data centre excellence powered by renewable energy.' }}
+            {{ $homepage->final_cta_description ?? 'Partner with VDC800 for Nordic data centre excellence powered by renewable energy.' }}
         </p>
         <a href="{{ $homepage->final_cta_button_url ?? route('contact.index') }}" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-red-500 hover:bg-brand-red-600 text-white text-sm font-medium rounded-full transition shadow-md">
             {{ $homepage->final_cta_button_text ?? 'Get in Touch' }}

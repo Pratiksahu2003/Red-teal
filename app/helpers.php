@@ -115,7 +115,15 @@ if (! function_exists('rich_content')) {
         $content = trim($content);
 
         if (preg_match('/<[^>]+>/', $content)) {
-            return strip_tags($content, '<p><br><strong><b><em><i><ul><ol><li><a><h2><h3><h4><blockquote><span><table><thead><tbody><tr><th><td>');
+            $content = strip_tags($content, '<p><br><strong><b><em><i><ul><ol><li><a><h2><h3><h4><blockquote><span><table><caption><thead><tbody><tr><th><td>');
+
+            // Wrap tables so wide CMS content scrolls horizontally on small screens.
+            if (stripos($content, '<table') !== false) {
+                $content = preg_replace('/<table\b/i', '<div class="cms-table-wrap"><table', $content);
+                $content = preg_replace('/<\/table>/i', '</table></div>', $content);
+            }
+
+            return $content;
         }
 
         return nl2br(e($content));
@@ -125,49 +133,13 @@ if (! function_exists('rich_content')) {
 if (! function_exists('company_map_link')) {
     function company_map_link(): ?string
     {
-        $link = settings('company.map_link');
-        if (filled($link)) {
-            return $link;
-        }
-
-        $parts = array_filter([
-            settings('company.address'),
-            settings('company.city'),
-            settings('company.postal_code'),
-            settings('company.country'),
-        ]);
-
-        if (empty($parts)) {
-            return null;
-        }
-
-        return 'https://www.google.com/maps/search/?api=1&query='.urlencode(implode(', ', $parts));
+        return app(\App\Services\MapUrlResolver::class)->resolveMapLink(settings('company.map_link'));
     }
 }
 
 if (! function_exists('company_map_embed_url')) {
     function company_map_embed_url(): ?string
     {
-        $embed = settings('company.map_embed_url');
-        if (filled($embed)) {
-            return $embed;
-        }
-
-        $link = company_map_link();
-        if (blank($link)) {
-            return null;
-        }
-
-        if (str_contains($link, '/maps/embed')) {
-            return $link;
-        }
-
-        if (str_contains($link, 'google.com/maps') || str_contains($link, 'maps.google.com')) {
-            $separator = str_contains($link, '?') ? '&' : '?';
-
-            return $link.$separator.'output=embed';
-        }
-
-        return 'https://www.google.com/maps?q='.urlencode($link).'&output=embed';
+        return app(\App\Services\MapUrlResolver::class)->resolveEmbedUrl(settings('company.map_link'));
     }
 }

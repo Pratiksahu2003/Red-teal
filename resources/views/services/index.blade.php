@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Services — ' . (settings('company.company_name') ?? 'RedNTeal'))
+@section('title', 'Services — ' . (settings('company.company_name') ?? 'VDC800'))
 
 @section('content')
 <x-page-hero fallback="images/hero-datacenter.jpg" alt="Our Services" size="md">

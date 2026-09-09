@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Data Centres — ' . (settings('company.company_name') ?? 'RedNTeal'))
-@section('meta_description', 'Explore RedNTeal sustainable Nordic data centre facilities — renewable-powered colocation across Northern Europe.')
+@section('title', 'Data Centres — ' . (settings('company.company_name') ?? 'VDC800'))
+@section('meta_description', 'Explore VDC800 sustainable Nordic data centre facilities — renewable-powered colocation across Northern Europe.')
 
 @section('content')
 <x-page-hero fallback="images/data-centre-facility.jpg" alt="Our Data Centres" size="md">

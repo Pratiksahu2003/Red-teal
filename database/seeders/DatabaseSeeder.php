@@ -32,12 +32,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         CompanySetting::create([
-            'company_name' => 'RedNTeal Data Centres',
-            'short_name' => 'RedNTeal',
-            'tagline' => 'Technology You Can Trust',
-            'description' => 'RedNTeal designs, builds, and operates premium data centre facilities powered entirely by renewable energy across Northern Europe.',
-            'about_company' => 'Founded with a vision to deliver world-class digital infrastructure without compromising the environment, RedNTeal combines Nordic engineering excellence with cutting-edge sustainability practices. Our facilities serve enterprises, cloud providers, and research institutions who demand reliability, security, and a net-zero carbon footprint.',
-            'email' => 'hello@rednteal.com',
+            'company_name' => 'VDC800 Data Centres',
+            'short_name' => 'VDC800',
+            'tagline' => 'IS FUTURE OF DCs',
+            'description' => 'VDC800 designs, builds, and operates premium data centre facilities powered entirely by renewable energy across Northern Europe.',
+            'about_company' => 'Founded with a vision to deliver world-class digital infrastructure without compromising the environment, VDC800 combines Nordic engineering excellence with cutting-edge sustainability practices. Our facilities serve enterprises, cloud providers, and research institutions who demand reliability, security, and a net-zero carbon footprint.',
+            'email' => 'hello@VDC800.com',
             'phone' => '+47 22 00 00 00',
             'secondary_phone' => '+46 8 00 00 00',
             'address' => 'Akersgata 12',
@@ -46,18 +46,18 @@ class DatabaseSeeder extends Seeder
             'country' => 'Norway',
             'postal_code' => '0158',
             'map_link' => 'https://www.google.com/maps/place/Akersgata+12,+0158+Oslo,+Norway',
-            'founded_year' => '2018',
+            'founded_year' => '2026',
             'vat_number' => 'NO123456789MVA',
             'business_registration_number' => '918 765 432',
             'logo' => 'Logo/logo.png',
-            'favicon' => 'Logo/favicon.ico',
+            'favicon' => 'Logo/favicon.png',
             'footer_logo' => 'Logo/logo.png',
         ]);
 
         SiteSetting::create([
-            'website_name' => 'RedNTeal',
+            'website_name' => 'VDC800',
             'website_url' => 'http://localhost',
-            'default_page_title' => 'RedNTeal — Sustainable Nordic Data Centres',
+            'default_page_title' => 'VDC800 — Sustainable Nordic Data Centres',
             'default_meta_description' => 'Premium renewable-powered data centre infrastructure in Northern Europe. Colocation, cloud connectivity, and enterprise hosting with 100% green energy.',
             'default_keywords' => 'data centre, nordic, sustainable, colocation, renewable energy, green hosting',
             'timezone' => 'Europe/Oslo',
@@ -65,12 +65,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $socialPlatforms = [
-            ['platform' => 'LinkedIn', 'url' => 'https://linkedin.com/company/rednteal', 'icon' => 'linkedin', 'sort_order' => 1],
-            ['platform' => 'X', 'url' => 'https://x.com/rednteal', 'icon' => 'twitter', 'sort_order' => 2],
-            ['platform' => 'Facebook', 'url' => 'https://facebook.com/rednteal', 'icon' => 'facebook', 'sort_order' => 3],
-            ['platform' => 'Instagram', 'url' => 'https://instagram.com/rednteal', 'icon' => 'instagram', 'sort_order' => 4],
-            ['platform' => 'GitHub', 'url' => 'https://github.com/rednteal', 'icon' => 'github', 'sort_order' => 5],
-            ['platform' => 'YouTube', 'url' => 'https://youtube.com/@rednteal', 'icon' => 'youtube', 'sort_order' => 6],
+            ['platform' => 'LinkedIn', 'url' => 'https://linkedin.com/company/VDC800', 'icon' => 'linkedin', 'sort_order' => 1],
+            ['platform' => 'X', 'url' => 'https://x.com/VDC800', 'icon' => 'twitter', 'sort_order' => 2],
+            ['platform' => 'Facebook', 'url' => 'https://facebook.com/VDC800', 'icon' => 'facebook', 'sort_order' => 3],
+            ['platform' => 'Instagram', 'url' => 'https://instagram.com/VDC800', 'icon' => 'instagram', 'sort_order' => 4],
+            ['platform' => 'GitHub', 'url' => 'https://github.com/VDC800', 'icon' => 'github', 'sort_order' => 5],
+            ['platform' => 'YouTube', 'url' => 'https://youtube.com/@VDC800', 'icon' => 'youtube', 'sort_order' => 6],
         ];
 
         foreach ($socialPlatforms as $social) {
@@ -78,17 +78,17 @@ class DatabaseSeeder extends Seeder
         }
 
         HomepageSetting::create([
-            'hero_heading' => 'Technology You Can Trust',
-            'hero_subtitle' => 'RedNTeal Data Centres',
-            'hero_description' => 'RedNTeal delivers enterprise-grade colocation and cloud connectivity from facilities powered entirely by renewable energy — where Nordic precision meets environmental responsibility.',
+            'hero_heading' => 'VDC800',
+            'hero_subtitle' => 'IS FUTURE OF DCs',
+            'hero_description' => 'VDC800 delivers enterprise-grade colocation and cloud connectivity from facilities powered entirely by renewable energy — where Nordic precision meets environmental responsibility.',
             'hero_cta_text' => 'Explore Our Data Centre',
             'hero_cta_url' => '/data-centre',
             'hero_secondary_cta_text' => 'View Services',
             'hero_secondary_cta_url' => '/services',
             'intro_heading' => 'Where reliability meets responsibility',
-            'intro_description' => 'Our facilities are engineered for 99.999% uptime while maintaining a PUE below 1.2. Every watt consumed is matched by certified renewable generation, making RedNTeal the preferred partner for organisations committed to digital growth and climate action.',
+            'intro_description' => 'Our facilities are engineered for 99.999% uptime while maintaining a PUE below 1.2. Every watt consumed is matched by certified renewable generation, making VDC800 the preferred partner for organisations committed to digital growth and climate action.',
             'sustainability_heading' => '100% renewable. Zero compromise.',
-            'sustainability_description' => 'From hydroelectric power in Norway to wind energy in Sweden, every RedNTeal facility runs on certified green electricity. We publish real-time sustainability metrics and hold ourselves accountable to the highest environmental standards in the industry.',
+            'sustainability_description' => 'From hydroelectric power in Norway to wind energy in Sweden, every VDC800 facility runs on certified green electricity. We publish real-time sustainability metrics and hold ourselves accountable to the highest environmental standards in the industry.',
             'sustainability_cta_text' => 'Our Sustainability Commitment',
             'sustainability_cta_url' => '/about',
             'infrastructure_heading' => 'Built for scale, designed for security',
@@ -102,7 +102,7 @@ class DatabaseSeeder extends Seeder
         $heroSlides = [
             [
                 'category' => 'Data Centre',
-                'title' => 'RedNTeal Oslo DC-1 Delivers 45MW of Sustainable Power',
+                'title' => 'VDC800 Oslo DC-1 Delivers 45MW of Sustainable Power',
                 'description' => 'Our flagship Nordic facility runs on 100% renewable energy with a PUE of 1.12 — enterprise-grade colocation built for the future of digital infrastructure.',
                 'image' => 'images/hero-slide-1.jpg',
                 'cta_text' => 'Read More',
@@ -176,17 +176,17 @@ class DatabaseSeeder extends Seeder
         $this->call(ServiceSolutionSeeder::class);
 
         $dataCentre = DataCentre::create([
-            'name' => 'RedNTeal Oslo DC-1',
-            'slug' => 'rednteal-oslo-dc-1',
+            'name' => 'VDC800 Oslo DC-1',
+            'slug' => 'VDC800-oslo-dc-1',
             'location' => 'Oslo, Norway',
             'country' => 'Norway',
             'address' => 'Lørenfaret 1C, 0580 Oslo',
             'latitude' => 59.9311,
             'longitude' => 10.7979,
             'short_description' => 'Our flagship 45MW facility in the heart of Oslo, powered entirely by Norwegian hydroelectric energy.',
-            'full_description' => '<p>RedNTeal Oslo DC-1 represents the pinnacle of sustainable data centre design. Located in the Løren industrial district with direct access to Norway\'s robust power grid, this facility combines 45MW of available capacity with a PUE of 1.12 — among the lowest in Europe.</p><p>The building features free-air cooling for 70% of the year, advanced fire suppression, and biometric access at every security zone. Carrier-neutral connectivity reaches 42 networks including direct cloud on-ramps to AWS, Azure, and Google Cloud.</p>',
-            'meta_title' => 'Oslo Data Centre — RedNTeal DC-1',
-            'meta_description' => 'Explore RedNTeal\'s flagship 45MW sustainable data centre in Oslo, Norway. 100% renewable energy, Tier III+ design.',
+            'full_description' => '<p>VDC800 Oslo DC-1 represents the pinnacle of sustainable data centre design. Located in the Løren industrial district with direct access to Norway\'s robust power grid, this facility combines 45MW of available capacity with a PUE of 1.12 — among the lowest in Europe.</p><p>The building features free-air cooling for 70% of the year, advanced fire suppression, and biometric access at every security zone. Carrier-neutral connectivity reaches 42 networks including direct cloud on-ramps to AWS, Azure, and Google Cloud.</p>',
+            'meta_title' => 'Oslo Data Centre — VDC800 DC-1',
+            'meta_description' => 'Explore VDC800\'s flagship 45MW sustainable data centre in Oslo, Norway. 100% renewable energy, Tier III+ design.',
             'cta_heading' => 'Schedule a facility tour',
             'cta_description' => 'Visit our Oslo campus and see how Nordic engineering delivers world-class digital infrastructure.',
             'cta_button_text' => 'Book a Tour',
@@ -197,17 +197,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $stockholm = DataCentre::create([
-            'name' => 'RedNTeal Stockholm DC-2',
-            'slug' => 'rednteal-stockholm-dc-2',
+            'name' => 'VDC800 Stockholm DC-2',
+            'slug' => 'VDC800-stockholm-dc-2',
             'location' => 'Stockholm, Sweden',
             'country' => 'Sweden',
             'address' => 'Kista Science Tower, 164 40 Kista',
             'latitude' => 59.4029,
             'longitude' => 17.9436,
             'short_description' => 'A 28MW carrier-neutral campus in Kista serving cloud providers and enterprises across Scandinavia.',
-            'full_description' => '<p>RedNTeal Stockholm DC-2 extends our Nordic footprint into Sweden\'s premier technology district. The facility delivers 28MW of renewable-powered capacity with direct fibre paths to major European internet exchanges and cloud regions.</p><p>Designed for hybrid cloud workloads, the campus offers high-density colocation, meet-me room services, and 24/7 remote hands support for regional enterprises.</p>',
-            'meta_title' => 'Stockholm Data Centre — RedNTeal DC-2',
-            'meta_description' => 'Explore RedNTeal\'s 28MW sustainable data centre in Stockholm, Sweden. Carrier-neutral connectivity and 100% renewable energy.',
+            'full_description' => '<p>VDC800 Stockholm DC-2 extends our Nordic footprint into Sweden\'s premier technology district. The facility delivers 28MW of renewable-powered capacity with direct fibre paths to major European internet exchanges and cloud regions.</p><p>Designed for hybrid cloud workloads, the campus offers high-density colocation, meet-me room services, and 24/7 remote hands support for regional enterprises.</p>',
+            'meta_title' => 'Stockholm Data Centre — VDC800 DC-2',
+            'meta_description' => 'Explore VDC800\'s 28MW sustainable data centre in Stockholm, Sweden. Carrier-neutral connectivity and 100% renewable energy.',
             'cta_heading' => 'Plan your deployment',
             'cta_description' => 'Speak with our Stockholm team about colocation and cross-connect options.',
             'cta_button_text' => 'Contact Us',
@@ -275,16 +275,16 @@ class DatabaseSeeder extends Seeder
 
         AboutSection::create([
             'hero_heading' => 'Building the sustainable backbone of digital Europe',
-            'hero_description' => 'RedNTeal was founded on a simple belief: the world\'s digital infrastructure should strengthen, not weaken, our planet. From our headquarters in Oslo, we design and operate data centres that prove sustainability and performance are not opposing forces.',
+            'hero_description' => 'VDC800 was founded on a simple belief: the world\'s digital infrastructure should strengthen, not weaken, our planet. From our headquarters in Oslo, we design and operate data centres that prove sustainability and performance are not opposing forces.',
             'mission' => 'To deliver world-class digital infrastructure powered entirely by renewable energy, enabling organisations to grow their digital capabilities while achieving their sustainability goals.',
             'vision' => 'A future where every byte processed in Europe runs on clean energy, hosted in facilities that set the global standard for efficiency and environmental responsibility.',
-            'story' => '<p>RedNTeal began in 2018 when a team of Nordic engineers and sustainability advocates recognised that the explosive growth of cloud computing was creating an equally explosive growth in energy demand. Rather than accept the status quo, they set out to prove that data centres could be both powerful and pristine.</p><p>Our first facility in Oslo opened in 2020, immediately achieving a PUE of 1.15 — well below the industry average. Today, we operate across Scandinavia with a pipeline of new facilities, each designed to push the boundaries of what sustainable infrastructure can achieve.</p>',
-            'sustainability' => 'Sustainability is not a feature at RedNTeal — it is our foundation. We source 100% renewable energy, publish quarterly sustainability reports, and design every facility to minimise waste heat, water consumption, and embodied carbon in construction materials.',
+            'story' => '<p>VDC800 began in 2018 when a team of Nordic engineers and sustainability advocates recognised that the explosive growth of cloud computing was creating an equally explosive growth in energy demand. Rather than accept the status quo, they set out to prove that data centres could be both powerful and pristine.</p><p>Our first facility in Oslo opened in 2020, immediately achieving a PUE of 1.15 — well below the industry average. Today, we operate across Scandinavia with a pipeline of new facilities, each designed to push the boundaries of what sustainable infrastructure can achieve.</p>',
+            'sustainability' => 'Sustainability is not a feature at VDC800 — it is our foundation. We source 100% renewable energy, publish quarterly sustainability reports, and design every facility to minimise waste heat, water consumption, and embodied carbon in construction materials.',
             'cta_heading' => 'Join us in building a greener digital future',
             'cta_description' => 'Whether you need colocation, cloud connectivity, or a custom enterprise solution, our team is ready to help.',
             'cta_button_text' => 'Contact Our Team',
             'cta_button_url' => '/contact',
-            'meta_title' => 'About RedNTeal — Sustainable Nordic Data Centres',
+            'meta_title' => 'About VDC800 — Sustainable Nordic Data Centres',
         ]);
 
         $values = [
@@ -324,7 +324,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Chief Technology Officer',
                 'company' => 'Mumbai FinTech Solutions',
                 'location' => 'Mumbai, India',
-                'quote' => 'RedNTeal gave us Nordic-grade colocation with latency that works for our European trading desks. Migration was smooth, and their team understood our RBI compliance requirements from day one.',
+                'quote' => 'VDC800 gave us Nordic-grade colocation with latency that works for our European trading desks. Migration was smooth, and their team understood our RBI compliance requirements from day one.',
                 'rating' => 5,
                 'sort_order' => 1,
             ],
@@ -333,7 +333,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Head of Infrastructure',
                 'company' => 'CloudScale India',
                 'location' => 'Bengaluru, India',
-                'quote' => 'We needed carrier-neutral connectivity and renewable energy credentials for our SaaS platform. RedNTeal delivered both — our PUE reporting to enterprise clients has never looked better.',
+                'quote' => 'We needed carrier-neutral connectivity and renewable energy credentials for our SaaS platform. VDC800 delivered both — our PUE reporting to enterprise clients has never looked better.',
                 'rating' => 5,
                 'sort_order' => 2,
             ],
@@ -342,7 +342,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'VP Engineering',
                 'company' => 'MediCare Digital',
                 'location' => 'Chennai, India',
-                'quote' => 'Hosting healthcare workloads in a Tier III+ facility with 24/7 NOC monitoring gave our hospital partners the confidence they needed. RedNTeal\'s security posture exceeded our audit checklist.',
+                'quote' => 'Hosting healthcare workloads in a Tier III+ facility with 24/7 NOC monitoring gave our hospital partners the confidence they needed. VDC800\'s security posture exceeded our audit checklist.',
                 'rating' => 5,
                 'sort_order' => 3,
             ],
@@ -351,7 +351,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Director of IT Operations',
                 'company' => 'ShopKart India',
                 'location' => 'New Delhi, India',
-                'quote' => 'During peak festival season, uptime is everything. RedNTeal\'s Oslo facility handled our traffic spikes without a single incident. Their support team responds within minutes, not hours.',
+                'quote' => 'During peak festival season, uptime is everything. VDC800\'s Oslo facility handled our traffic spikes without a single incident. Their support team responds within minutes, not hours.',
                 'rating' => 5,
                 'sort_order' => 4,
             ],
@@ -360,7 +360,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Head of Cloud Architecture',
                 'company' => 'Hyderabad Tech Labs',
                 'location' => 'Hyderabad, India',
-                'quote' => 'The direct cloud on-ramps to AWS and Azure saved us months of networking work. RedNTeal feels like an extension of our engineering team — proactive, transparent, and deeply technical.',
+                'quote' => 'The direct cloud on-ramps to AWS and Azure saved us months of networking work. VDC800 feels like an extension of our engineering team — proactive, transparent, and deeply technical.',
                 'rating' => 5,
                 'sort_order' => 5,
             ],
@@ -369,7 +369,7 @@ class DatabaseSeeder extends Seeder
                 'role' => 'Chief Information Officer',
                 'company' => 'Pune Manufacturing Group',
                 'location' => 'Pune, India',
-                'quote' => 'We evaluated facilities across Europe and chose RedNTeal for their sustainability credentials and biometric security. Our board was impressed by the quarterly carbon reporting they provide.',
+                'quote' => 'We evaluated facilities across Europe and chose VDC800 for their sustainability credentials and biometric security. Our board was impressed by the quarterly carbon reporting they provide.',
                 'rating' => 5,
                 'sort_order' => 6,
             ],

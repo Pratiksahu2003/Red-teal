@@ -42,24 +42,14 @@
         </div>
 
         <h3 class="font-medium text-brand-900">Map</h3>
-        <p class="text-sm text-brand-500 -mt-2">Shown on the contact page. Paste a Google Maps share link or embed URL.</p>
-        <div class="space-y-4">
-            @include('admin.components.input', [
-                'name' => 'map_link',
-                'label' => 'Google Maps Link',
-                'value' => $company->map_link,
-                'type' => 'url',
-                'placeholder' => 'https://www.google.com/maps/place/...',
-            ])
-            @include('admin.components.input', [
-                'name' => 'map_embed_url',
-                'label' => 'Map Embed URL (optional)',
-                'value' => $company->map_embed_url,
-                'type' => 'url',
-                'placeholder' => 'https://www.google.com/maps/embed?pb=...',
-            ])
-            <p class="text-xs text-brand-500">Leave embed URL blank to auto-generate from the Google Maps link. In Google Maps, use <strong>Share → Embed a map</strong> to copy the iframe <code class="text-brand-700">src</code> URL.</p>
-        </div>
+        <p class="text-sm text-brand-500 -mt-2">Shown on the contact page. Paste any Google Maps share link — the map embed is generated automatically.</p>
+        @include('admin.components.input', [
+            'name' => 'map_link',
+            'label' => 'Google Maps Link',
+            'value' => $company->map_link,
+            'placeholder' => 'https://maps.app.goo.gl/... or https://www.google.com/maps/place/...',
+        ])
+        <p class="text-xs text-brand-500">Supported: Google Maps share links, place URLs, and shortened <code class="text-brand-700">maps.app.goo.gl</code> links. No iframe code needed.</p>
 
         <hr class="border-brand-200">
 

@@ -1,10 +1,10 @@
 <footer class="bg-white border-t border-brand-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10">
-        {{-- Brand + Certifications --}}
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 pb-6 border-b border-brand-100">
-            <div class="min-w-0 flex-1">
+        {{-- Brand --}}
+        <div class="pb-6 border-b border-brand-100">
+            <div class="min-w-0">
                 <x-logo class="h-8 w-auto mb-2" />
-                <p class="text-brand-teal-600 font-medium text-sm">{{ settings('company.tagline') ?? 'Technology You Can Trust' }}</p>
+                <p class="text-brand-teal-600 font-medium text-sm">{{ settings('company.tagline') ?? 'IS FUTURE OF DCs' }}</p>
                 <p class="text-brand-500 text-sm mt-1 max-w-lg leading-snug">{{ Str::limit(settings('company.description'), 140) }}</p>
                 @if(count(settings('social_links') ?? []) > 0)
                     <div class="flex flex-wrap gap-1.5 mt-3">
@@ -18,23 +18,6 @@
                         @endforeach
                     </div>
                 @endif
-            </div>
-
-            <div class="lg:w-[min(100%,28rem)] shrink-0">
-                <h4 class="text-brand-900 font-bold text-sm mb-2">Certifications</h4>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                    @foreach([
-                        ['title' => 'ISO 27001', 'subtitle' => 'Security'],
-                        ['title' => 'Tier III+', 'subtitle' => 'Certified'],
-                        ['title' => '100% Renewable', 'subtitle' => 'Energy'],
-                        ['title' => '99.999%', 'subtitle' => 'Uptime SLA'],
-                    ] as $cert)
-                        <div class="bg-brand-red-50 border border-brand-red-100 rounded-md px-2 py-2 text-center hover:border-brand-teal-200 hover:bg-brand-teal-50 transition">
-                            <p class="text-brand-red-600 font-bold text-[11px] leading-tight">{{ $cert['title'] }}</p>
-                            <p class="text-brand-teal-600 text-[10px] mt-0.5">{{ $cert['subtitle'] }}</p>
-                        </div>
-                    @endforeach
-                </div>
             </div>
         </div>
 
@@ -133,7 +116,10 @@
 
         {{-- Sitemap --}}
         <div id="sitemap" class="mt-6 pt-5 border-t border-brand-100 scroll-mt-24">
-            <h4 class="text-brand-900 font-bold text-xs uppercase tracking-wide mb-2">Sitemap</h4>
+            <div class="flex items-center justify-between gap-4 mb-2">
+                <h4 class="text-brand-900 font-bold text-xs uppercase tracking-wide">Quick Sitemap</h4>
+                <a href="{{ route('legal.sitemap') }}" class="text-xs font-semibold text-brand-red-500 hover:text-brand-red-600 transition">View full sitemap</a>
+            </div>
             <div class="flex flex-wrap gap-x-3 gap-y-1 text-sm leading-relaxed">
                 <a href="{{ route('home') }}" class="text-brand-500 hover:text-brand-red-500 transition">Home</a>
                 <span class="text-brand-300 select-none">·</span>
@@ -167,7 +153,7 @@
                 <div class="text-center sm:text-left">
                     <p class="text-brand-700">
                         &copy; {{ date('Y') }}
-                        <span class="font-semibold text-brand-900">{{ settings('company.company_name') ?? 'RedNTeal' }}</span>.
+                        <span class="font-semibold text-brand-900">{{ settings('company.company_name') ?? 'VDC800' }}</span>.
                         All rights reserved.
                     </p>
                     @if(settings('company.founded_year'))
@@ -189,14 +175,10 @@
                         Get Quote
                     </a>
                     <span class="hidden sm:inline text-brand-300">|</span>
-                    <a href="{{ route('about.index') }}#privacy" class="text-brand-500 hover:text-brand-red-500 transition">Privacy</a>
-                    <a href="{{ route('about.index') }}#terms" class="text-brand-500 hover:text-brand-red-500 transition">Terms</a>
-                    <button
-                        type="button"
-                        onclick="localStorage.removeItem('cookie_accepted'); window.dispatchEvent(new CustomEvent('show-cookie-notice'))"
-                        class="text-brand-500 hover:text-brand-red-500 transition"
-                    >Cookies</button>
-                    <a href="{{ route('home') }}#sitemap" class="text-brand-500 hover:text-brand-red-500 transition">Sitemap</a>
+                    <a href="{{ route('legal.privacy') }}" class="text-brand-500 hover:text-brand-red-500 transition">Privacy</a>
+                    <a href="{{ route('legal.terms') }}" class="text-brand-500 hover:text-brand-red-500 transition">Terms</a>
+                    <a href="{{ route('legal.cookies') }}" class="text-brand-500 hover:text-brand-red-500 transition">Cookies</a>
+                    <a href="{{ route('legal.sitemap') }}" class="text-brand-500 hover:text-brand-red-500 transition">Sitemap</a>
                 </div>
             </div>
         </div>

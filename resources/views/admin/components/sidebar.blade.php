@@ -93,7 +93,7 @@
     </nav>
 
     <div class="p-4 border-t border-brand-200 bg-brand-50/50">
-        <p class="text-xs text-brand-500 text-center">RedNTeal CMS</p>
+        <p class="text-xs text-brand-500 text-center">VDC800 CMS</p>
     </div>
 </aside>
 

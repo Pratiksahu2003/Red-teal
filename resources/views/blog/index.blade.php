@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Blog — ' . (settings('company.company_name') ?? 'RedNTeal'))
+@section('title', 'Blog — ' . (settings('company.company_name') ?? 'VDC800'))
 
 @section('content')
 <x-page-hero fallback="images/hero-slide-3.jpg" alt="Blog" size="sm">

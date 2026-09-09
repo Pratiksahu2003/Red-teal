@@ -108,33 +108,33 @@ class ServiceSolutionSeeder extends Seeder
         }
 
         $serviceSeeds = [
-            'rednteal-svc-colocation-oslo-01',
-            'rednteal-svc-cloud-exchange-02',
-            'rednteal-svc-managed-infra-03',
-            'rednteal-svc-dedicated-hosting-04',
-            'rednteal-svc-ip-transit-05',
-            'rednteal-svc-ddos-edge-06',
-            'rednteal-svc-backup-dr-07',
-            'rednteal-svc-remote-hands-08',
-            'rednteal-svc-hpc-density-09',
-            'rednteal-svc-compliance-audit-10',
-            'rednteal-svc-sd-wan-fabric-11',
-            'rednteal-svc-infra-consulting-12',
+            'VDC800-svc-colocation-oslo-01',
+            'VDC800-svc-cloud-exchange-02',
+            'VDC800-svc-managed-infra-03',
+            'VDC800-svc-dedicated-hosting-04',
+            'VDC800-svc-ip-transit-05',
+            'VDC800-svc-ddos-edge-06',
+            'VDC800-svc-backup-dr-07',
+            'VDC800-svc-remote-hands-08',
+            'VDC800-svc-hpc-density-09',
+            'VDC800-svc-compliance-audit-10',
+            'VDC800-svc-sd-wan-fabric-11',
+            'VDC800-svc-infra-consulting-12',
         ];
 
         $solutionSeeds = [
-            'rednteal-sol-financial-01',
-            'rednteal-sol-healthcare-02',
-            'rednteal-sol-media-streaming-03',
-            'rednteal-sol-government-04',
-            'rednteal-sol-ecommerce-05',
-            'rednteal-sol-gaming-06',
-            'rednteal-sol-telecom-07',
-            'rednteal-sol-energy-utilities-08',
-            'rednteal-sol-education-09',
-            'rednteal-sol-manufacturing-iot-10',
-            'rednteal-sol-saas-scale-11',
-            'rednteal-sol-research-hpc-12',
+            'VDC800-sol-financial-01',
+            'VDC800-sol-healthcare-02',
+            'VDC800-sol-media-streaming-03',
+            'VDC800-sol-government-04',
+            'VDC800-sol-ecommerce-05',
+            'VDC800-sol-gaming-06',
+            'VDC800-sol-telecom-07',
+            'VDC800-sol-energy-utilities-08',
+            'VDC800-sol-education-09',
+            'VDC800-sol-manufacturing-iot-10',
+            'VDC800-sol-saas-scale-11',
+            'VDC800-sol-research-hpc-12',
         ];
 
         $allUrls = self::UNIQUE_IMAGE_URLS;
@@ -158,7 +158,7 @@ class ServiceSolutionSeeder extends Seeder
             $context = stream_context_create([
                 'http' => [
                     'method' => 'GET',
-                    'header' => "User-Agent: RedNTeal-CMS-Seeder/1.0\r\n",
+                    'header' => "User-Agent: VDC800-CMS-Seeder/1.0\r\n",
                     'timeout' => 60,
                     'ignore_errors' => true,
                 ],

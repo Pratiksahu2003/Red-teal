@@ -287,6 +287,17 @@ Alpine.start();
 
 document.addEventListener('DOMContentLoaded', () => {
     createIcons({ icons });
+
+    document.querySelectorAll('.cms-content table').forEach((table) => {
+        if (table.closest('.cms-table-wrap')) {
+            return;
+        }
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'cms-table-wrap';
+        table.parentNode?.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+    });
 });
 
 document.addEventListener('alpine:initialized', () => {

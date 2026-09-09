@@ -18,7 +18,7 @@ class BlogSeeder extends Seeder
             ['name' => 'Sustainability', 'slug' => 'sustainability', 'description' => 'Renewable energy, PUE optimisation, and green data centre practices.', 'sort_order' => 2],
             ['name' => 'Cloud & Connectivity', 'slug' => 'cloud-connectivity', 'description' => 'Hybrid cloud, cross-connects, and carrier-neutral networking.', 'sort_order' => 3],
             ['name' => 'Security & Compliance', 'slug' => 'security-compliance', 'description' => 'ISO standards, physical security, and regulatory readiness.', 'sort_order' => 4],
-            ['name' => 'Industry News', 'slug' => 'industry-news', 'description' => 'Market updates and RedNTeal announcements from across Northern Europe.', 'sort_order' => 5],
+            ['name' => 'Industry News', 'slug' => 'industry-news', 'description' => 'Market updates and VDC800 announcements from across Northern Europe.', 'sort_order' => 5],
         ];
 
         $categoryIds = [];
@@ -40,7 +40,7 @@ class BlogSeeder extends Seeder
             ['Carbon Reporting for Enterprise Colocation Clients', 1],
             ['Multi-Cloud Networking Without Internet Transit', 2],
             ['GDPR-Ready Infrastructure for Financial Services', 3],
-            ['RedNTeal Partners with Scandinavian Wind Farms', 4],
+            ['VDC800 Partners with Scandinavian Wind Farms', 4],
             ['Remote Hands Support: What to Expect 24/7', 0],
             ['Heat Recovery Systems in Urban Data Centres', 1],
             ['Latency Optimisation for Trading Platforms', 2],
@@ -58,8 +58,8 @@ class BlogSeeder extends Seeder
                 'excerpt' => $this->excerpt($title),
                 'body' => $this->body($title, $categories[$catIndex]['name']),
                 'featured_image' => "images/blog/blog-{$num}.jpg",
-                'author' => 'RedNTeal Team',
-                'meta_title' => $title . ' — RedNTeal Blog',
+                'author' => 'VDC800 Team',
+                'meta_title' => $title . ' — VDC800 Blog',
                 'meta_description' => $this->excerpt($title),
                 'published_at' => now()->subDays(20 - $index),
                 'sort_order' => $num,
@@ -92,13 +92,13 @@ class BlogSeeder extends Seeder
 
     private function excerpt(string $title): string
     {
-        return "Explore {$title} with practical guidance from RedNTeal infrastructure specialists operating sustainable Nordic data centres.";
+        return "Explore {$title} with practical guidance from VDC800 infrastructure specialists operating sustainable Nordic data centres.";
     }
 
     private function body(string $title, string $category): string
     {
         return <<<HTML
-<p>{$title} is a critical topic for organisations deploying mission-critical workloads across Northern Europe. At RedNTeal, we combine engineering discipline with sustainability leadership to help enterprises make informed infrastructure decisions that balance performance, compliance, and environmental responsibility.</p>
+<p>{$title} is a critical topic for organisations deploying mission-critical workloads across Northern Europe. At VDC800, we combine engineering discipline with sustainability leadership to help enterprises make informed infrastructure decisions that balance performance, compliance, and environmental responsibility.</p>
 <p>Modern data centre strategy requires more than rack space — it demands transparent metrics, resilient design, and partnerships that scale with your business. The following overview summarises key benchmarks our clients evaluate when planning colocation, cloud connectivity, and managed services in the {$category} space.</p>
 <h3>Key Metrics at a Glance</h3>
 <table>
@@ -106,7 +106,7 @@ class BlogSeeder extends Seeder
         <tr>
             <th>Metric</th>
             <th>Industry Average</th>
-            <th>RedNTeal Target</th>
+            <th>VDC800 Target</th>
             <th>Notes</th>
         </tr>
     </thead>
@@ -137,8 +137,8 @@ class BlogSeeder extends Seeder
         </tr>
     </tbody>
 </table>
-<p>Organisations adopting these standards report improved operational predictability, lower total cost of ownership, and stronger alignment with corporate sustainability goals. RedNTeal publishes real-time environmental data so stakeholders can audit energy consumption alongside traditional availability metrics.</p>
-<p>Whether you are evaluating a first colocation deployment or optimising an existing hybrid cloud architecture, our team provides architecture reviews, capacity planning, and hands-on support from our Oslo NOC. Contact RedNTeal to discuss how these principles apply to your specific requirements.</p>
+<p>Organisations adopting these standards report improved operational predictability, lower total cost of ownership, and stronger alignment with corporate sustainability goals. VDC800 publishes real-time environmental data so stakeholders can audit energy consumption alongside traditional availability metrics.</p>
+<p>Whether you are evaluating a first colocation deployment or optimising an existing hybrid cloud architecture, our team provides architecture reviews, capacity planning, and hands-on support from our Oslo NOC. Contact VDC800 to discuss how these principles apply to your specific requirements.</p>
 HTML;
     }
 }

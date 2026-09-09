@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ($dataCentre->meta_title ?? $dataCentre->name ?? 'Data Centre') . ' — ' . (settings('company.company_name') ?? 'RedNTeal'))
+@section('title', ($dataCentre->meta_title ?? $dataCentre->name ?? 'Data Centre') . ' — ' . (settings('company.company_name') ?? 'VDC800'))
 @section('meta_description', $dataCentre->meta_description ?? $dataCentre->short_description)
 
 @section('content')
@@ -24,18 +24,18 @@
 </x-page-hero>
 
 @if($specifications->count())
-<section class="py-20 bg-white border-b border-brand-200">
+<section class="py-12 sm:py-16 lg:py-20 bg-white border-b border-brand-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6 sm:gap-8">
             @foreach($specifications as $spec)
-                <div class="text-center">
-                    <div class="w-12 h-12 rounded-xl bg-brand-teal-100 flex items-center justify-center mx-auto mb-4">
+                <div class="text-center px-2">
+                    <div class="w-12 h-12 rounded-xl bg-brand-teal-100 flex items-center justify-center mx-auto mb-3 sm:mb-4">
                         <i data-lucide="{{ $spec->icon ?? 'gauge' }}" class="w-6 h-6 text-brand-teal-700"></i>
                     </div>
-                    <p class="font-display text-3xl lg:text-4xl text-brand-900 mb-1">
-                        {{ $spec->value }}@if($spec->unit)<span class="text-xl text-brand-teal-600">{{ $spec->unit }}</span>@endif
+                    <p class="font-display text-2xl sm:text-3xl lg:text-4xl text-brand-900 mb-1 break-words">
+                        {{ $spec->value }}@if($spec->unit)<span class="text-lg sm:text-xl text-brand-teal-600">{{ $spec->unit }}</span>@endif
                     </p>
-                    <p class="font-medium text-brand-700">{{ $spec->label }}</p>
+                    <p class="font-medium text-brand-700 text-sm sm:text-base">{{ $spec->label }}</p>
                     @if($spec->description)
                         <p class="text-sm text-brand-500 mt-1">{{ $spec->description }}</p>
                     @endif
@@ -47,15 +47,17 @@
 @endif
 
 @if($dataCentre->full_description)
-<section class="py-24 lg:py-32">
+<section class="py-16 lg:py-24 xl:py-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            <div>
-                <h2 class="font-display text-4xl text-brand-900 mb-6">About This Facility</h2>
-                <div class="prose-content text-brand-600 text-lg">{!! rich_content($dataCentre->full_description) !!}</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-20 items-start">
+            <div class="min-w-0">
+                <h2 class="font-display text-3xl sm:text-4xl text-brand-900 mb-6">About This Facility</h2>
+                <x-cms-content class="text-brand-600 text-base sm:text-lg">
+                    {!! rich_content($dataCentre->full_description) !!}
+                </x-cms-content>
             </div>
             @if($dataCentre->address || ($dataCentre->latitude && $dataCentre->longitude))
-                <div class="bg-brand-100 rounded-2xl p-8">
+                <div class="bg-brand-100 rounded-2xl p-6 sm:p-8 min-w-0">
                     <h3 class="font-semibold text-brand-900 mb-4 flex items-center gap-2">
                         <i data-lucide="map-pin" class="w-5 h-5 text-brand-teal-600"></i> Location
                     </h3>

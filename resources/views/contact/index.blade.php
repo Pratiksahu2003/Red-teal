@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Contact — ' . (settings('company.company_name') ?? 'RedNTeal'))
+@section('title', 'Contact — ' . (settings('company.company_name') ?? 'VDC800'))
 
 @section('content')
 @php
     $mapLink = company_map_link();
     $mapEmbed = company_map_embed_url();
 @endphp
-<x-page-hero fallback="images/hero-slide-2.jpg" alt="Contact RedNTeal" size="md">
+<x-page-hero fallback="images/hero-slide-2.jpg" alt="Contact VDC800" size="md">
     <p class="text-brand-teal-400 text-sm font-medium tracking-widest uppercase mb-3">Get in Touch</p>
     <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl mb-4">Contact Us</h1>
     <p class="text-brand-200 text-base sm:text-lg max-w-2xl leading-relaxed">Ready to discuss your data centre requirements? Our team is here to help you find the right sustainable infrastructure solution.</p>
@@ -165,7 +165,7 @@
         <div class="rounded-2xl overflow-hidden border border-brand-200 shadow-lg bg-white">
             <iframe
                 src="{{ $mapEmbed }}"
-                title="RedNTeal office location map"
+                title="VDC800 office location map"
                 class="w-full h-[320px] sm:h-[400px] lg:h-[480px] border-0"
                 allowfullscreen
                 loading="lazy"

@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
-@section('title', ($about->meta_title ?? 'About Us') . ' — ' . (settings('company.company_name') ?? 'RedNTeal'))
+@section('title', ($about->meta_title ?? 'About Us') . ' — ' . (settings('company.company_name') ?? 'VDC800'))
 @section('meta_description', $about->meta_description ?? settings('company.description'))
 
 @section('content')
 <x-page-hero
     :image="$about->hero_image"
     fallback="images/about-technology.jpg"
-    alt="About RedNTeal"
+    alt="About VDC800"
     size="lg"
     align="center"
 >
-    <p class="text-brand-teal-400 text-sm font-medium tracking-widest uppercase mb-3">About RedNTeal</p>
+    <p class="text-brand-teal-400 text-sm font-medium tracking-widest uppercase mb-3">About VDC800</p>
     <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl mb-4 max-w-3xl">
         {{ $about->hero_heading ?? 'Sustainable Nordic Data Centre Excellence' }}
     </h1>
@@ -62,7 +62,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <h2 class="font-display text-4xl text-brand-900 mb-4">Our Values</h2>
-            <p class="text-brand-600">The principles that guide everything we do at RedNTeal.</p>
+            <p class="text-brand-600">The principles that guide everything we do at VDC800.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach($values as $value)
@@ -119,7 +119,7 @@
             {{ $about->cta_heading ?? 'Join us in building sustainable infrastructure' }}
         </h2>
         <p class="text-lg text-brand-600 mb-10 max-w-2xl mx-auto">
-            {{ $about->cta_description ?? 'Partner with RedNTeal for data centre solutions that perform brilliantly and respect the planet.' }}
+            {{ $about->cta_description ?? 'Partner with VDC800 for data centre solutions that perform brilliantly and respect the planet.' }}
         </p>
         <a href="{{ $about->cta_button_url ?? route('contact.index') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-brand-900 hover:bg-brand-800 text-white font-medium rounded-full transition">
             {{ $about->cta_button_text ?? 'Get in Touch' }}

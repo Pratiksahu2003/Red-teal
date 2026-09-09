@@ -1,4 +1,4 @@
-# RedNTeal — robots.txt
+# VDC800 — robots.txt
 # Generated for search engine crawlers. Regenerate with: php artisan sitemap:generate
 
 User-agent: *
@@ -23,4 +23,4 @@ Disallow: /
 User-agent: CCBot
 Disallow: /
 
-Sitemap: https://rednteal.test/sitemap.xml
+Sitemap: https://rednteal.vedmint.com/sitemap.xml
