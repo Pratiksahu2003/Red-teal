@@ -15,21 +15,30 @@
     @mouseenter="stopAutoplay()"
     @mouseleave="slides.length > 1 && startAutoplay()"
 >
-    {{-- Full-bleed background images --}}
-    <div class="absolute inset-0 z-0">
+    {{-- Full-bleed premium background images --}}
+    <div class="absolute inset-0 z-0 bg-brand-950">
         <template x-if="slides.length">
             <template x-for="(slide, index) in slides" :key="'bg-' + index">
-                <img
-                    :src="slide.image"
-                    :alt="slide.title"
-                    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+                <div
+                    class="absolute inset-0 transition-opacity duration-[1400ms] ease-in-out"
                     :class="active === index ? 'opacity-100 z-10' : 'opacity-0 z-0'"
                 >
+                    <img
+                        :src="slide.image"
+                        :alt="slide.title"
+                        class="hero-slide-image absolute inset-0 w-full h-full object-cover"
+                        :class="active === index ? 'hero-slide-image--active' : ''"
+                        :fetchpriority="index === 0 ? 'high' : 'low'"
+                        :loading="index === 0 ? 'eager' : 'lazy'"
+                        decoding="async"
+                    >
+                </div>
             </template>
         </template>
-        {{-- Dark gradient overlay for text readability (left-heavy, like reference) --}}
-        <div class="absolute inset-0 z-20 bg-gradient-to-r from-black/85 via-black/55 to-black/25"></div>
-        <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
+        {{-- Cinematic overlays for text readability --}}
+        <div class="absolute inset-0 z-20 bg-gradient-to-r from-black/90 via-black/60 to-black/20"></div>
+        <div class="absolute inset-0 z-20 bg-gradient-to-t from-black/75 via-black/10 to-black/35"></div>
+        <div class="absolute inset-0 z-20 hero-vignette"></div>
     </div>
 
     {{-- Hero content overlay --}}

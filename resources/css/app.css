@@ -277,3 +277,31 @@
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+
+/* Hero carousel — premium full-bleed imagery */
+.hero-slide-image {
+    transform: scale(1.08);
+    filter: saturate(1.08) contrast(1.04);
+    will-change: transform, opacity;
+}
+
+.hero-slide-image--active {
+    animation: heroKenBurns 8s ease-out forwards;
+}
+
+@keyframes heroKenBurns {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+}
+
+.hero-vignette {
+    background: radial-gradient(ellipse at center, transparent 40%, rgb(0 0 0 / 0.35) 100%);
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide-image--active {
+        animation: none;
+        transform: scale(1);
+    }
+}
