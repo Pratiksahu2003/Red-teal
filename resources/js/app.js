@@ -3,6 +3,7 @@ import Alpine from 'alpinejs';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createIcons, icons } from 'lucide';
+import { initHomeScrollAnimations } from './home-scroll';
 
 window.Alpine = Alpine;
 window.gsap = gsap;
@@ -232,6 +233,83 @@ Alpine.data('heroCarousel', (slidesJson = '[]') => ({
     },
 }));
 
+Alpine.data('siteNav', () => ({
+    open: false,
+    servicesMenu: false,
+    solutionsMenu: false,
+    blogMenu: false,
+    mobileServicesOpen: false,
+    mobileSolutionsOpen: false,
+    mobileBlogOpen: false,
+    closeMenus() {
+        this.servicesMenu = false;
+        this.solutionsMenu = false;
+        this.blogMenu = false;
+    },
+    openServicesMenu() {
+        this.solutionsMenu = false;
+        this.blogMenu = false;
+        this.servicesMenu = true;
+        this.positionDropdown(this.$refs.servicesPanel);
+    },
+    openSolutionsMenu() {
+        this.servicesMenu = false;
+        this.blogMenu = false;
+        this.solutionsMenu = true;
+        this.positionDropdown(this.$refs.solutionsPanel);
+    },
+    openBlogMenu() {
+        this.servicesMenu = false;
+        this.solutionsMenu = false;
+        this.blogMenu = true;
+        this.positionDropdown(this.$refs.blogPanel);
+    },
+    positionDropdown(panel) {
+        if (!panel) {
+            return;
+        }
+
+        this.$nextTick(() => {
+            requestAnimationFrame(() => {
+                const trigger = panel.closest('[data-nav-dropdown]');
+                if (!trigger) {
+                    return;
+                }
+
+                panel.style.left = '0px';
+                panel.style.right = 'auto';
+                panel.style.transform = '';
+
+                const padding = 16;
+                const viewportWidth = document.documentElement.clientWidth;
+                const triggerRect = trigger.getBoundingClientRect();
+                const panelWidth = panel.getBoundingClientRect().width;
+
+                if (!panelWidth) {
+                    return;
+                }
+
+                // Center the panel under its trigger, then clamp inside the viewport.
+                let left = (triggerRect.width - panelWidth) / 2;
+                let absoluteLeft = triggerRect.left + left;
+                let absoluteRight = absoluteLeft + panelWidth;
+
+                if (absoluteLeft < padding) {
+                    left += padding - absoluteLeft;
+                    absoluteLeft = triggerRect.left + left;
+                    absoluteRight = absoluteLeft + panelWidth;
+                }
+
+                if (absoluteRight > viewportWidth - padding) {
+                    left -= absoluteRight - (viewportWidth - padding);
+                }
+
+                panel.style.left = `${left}px`;
+            });
+        });
+    },
+}));
+
 Alpine.data('reviewsSlider', (reviewsJson = '[]') => ({
     reviews: [],
     active: 0,
@@ -287,6 +365,7 @@ Alpine.start();
 
 document.addEventListener('DOMContentLoaded', () => {
     createIcons({ icons });
+    initHomeScrollAnimations();
 
     document.querySelectorAll('.cms-content table').forEach((table) => {
         if (table.closest('.cms-table-wrap')) {

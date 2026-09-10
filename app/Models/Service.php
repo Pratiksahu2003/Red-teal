@@ -8,17 +8,17 @@ use Illuminate\Support\Str;
 class Service extends Model
 {
     protected $fillable = [
-        'title', 'slug', 'category', 'short_description', 'full_description', 'featured_image',
+        'title', 'slug', 'category', 'short_description', 'full_description', 'items', 'featured_image',
         'icon', 'cta_text', 'cta_url', 'meta_title', 'meta_description', 'og_image',
         'sort_order', 'status',
     ];
 
+    protected $casts = [
+        'items' => 'array',
+    ];
+
     public const CATEGORIES = [
-        'Hosting & Infrastructure',
-        'Cloud & Connectivity',
-        'Managed Services',
-        'Security & Compliance',
-        'Consulting',
+        'Advisory Services',
     ];
 
     protected static function booted(): void

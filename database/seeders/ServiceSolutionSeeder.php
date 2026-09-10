@@ -10,6 +10,20 @@ use Illuminate\Support\Facades\File;
 
 class ServiceSolutionSeeder extends Seeder
 {
+    /** @var array<int, string> Premium realistic images mapped to each advisory service. */
+    private const SERVICE_IMAGE_URLS = [
+        // Strategy & Advisory — executive planning session
+        'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1400&h=900&q=85',
+        // Investment & Due Diligence — financial analysis dashboard
+        'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1400&h=900&q=85',
+        // Engineering & Design — high-density data center server hall
+        'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&h=900&q=85',
+        // Procurement & Execution — electrical infrastructure & equipment
+        'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&h=900&q=85',
+        // Demand Generation — business development & client connections
+        'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1400&h=900&q=85',
+    ];
+
     /** @var array<int, string> */
     private const UNIQUE_IMAGE_URLS = [
         'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&h=900&q=80',
@@ -49,18 +63,18 @@ class ServiceSolutionSeeder extends Seeder
             $num = $index + 1;
             $imagePath = "images/services/service-{$num}.jpg";
             $keywords = $service['keywords'];
-            $tableRows = $service['table_rows'];
-            unset($service['keywords'], $service['table_rows']);
+            $items = $service['items'];
+            unset($service['keywords'], $service['items']);
 
             Service::create(array_merge($service, [
                 'featured_image' => $imagePath,
                 'og_image' => $imagePath,
-                'full_description' => LongFormSeoContent::serviceBody(
+                'items' => $items,
+                'full_description' => LongFormSeoContent::advisoryServiceBody(
                     $service['title'],
-                    $service['category'],
-                    $service['slug'],
+                    $service['short_description'],
+                    $items,
                     $keywords,
-                    $tableRows,
                 ),
                 'meta_title' => LongFormSeoContent::metaTitle($service['title']),
                 'meta_description' => LongFormSeoContent::metaDescription($service['title'], 'service', $keywords),
@@ -108,19 +122,20 @@ class ServiceSolutionSeeder extends Seeder
         }
 
         $serviceSeeds = [
-            'VDC800-svc-colocation-oslo-01',
-            'VDC800-svc-cloud-exchange-02',
-            'VDC800-svc-managed-infra-03',
-            'VDC800-svc-dedicated-hosting-04',
-            'VDC800-svc-ip-transit-05',
-            'VDC800-svc-ddos-edge-06',
-            'VDC800-svc-backup-dr-07',
-            'VDC800-svc-remote-hands-08',
-            'VDC800-svc-hpc-density-09',
-            'VDC800-svc-compliance-audit-10',
-            'VDC800-svc-sd-wan-fabric-11',
-            'VDC800-svc-infra-consulting-12',
+            'VDC800-svc-strategy-advisory-01',
+            'VDC800-svc-investment-diligence-02',
+            'VDC800-svc-engineering-design-03',
+            'VDC800-svc-procurement-execution-04',
+            'VDC800-svc-demand-generation-05',
         ];
+
+        foreach ($serviceSeeds as $i => $seed) {
+            $this->downloadUniqueImage(
+                self::SERVICE_IMAGE_URLS[$i],
+                "{$serviceDir}/service-".($i + 1).'.jpg',
+                $seed,
+            );
+        }
 
         $solutionSeeds = [
             'VDC800-sol-financial-01',
@@ -138,10 +153,6 @@ class ServiceSolutionSeeder extends Seeder
         ];
 
         $allUrls = self::UNIQUE_IMAGE_URLS;
-
-        foreach ($serviceSeeds as $i => $seed) {
-            $this->downloadUniqueImage($allUrls[$i], "{$serviceDir}/service-".($i + 1).'.jpg', $seed);
-        }
 
         foreach ($solutionSeeds as $i => $seed) {
             $this->downloadUniqueImage($allUrls[$i + 12], "{$solutionDir}/solution-".($i + 1).'.jpg', $seed);
@@ -246,184 +257,159 @@ class ServiceSolutionSeeder extends Seeder
     {
         return [
             $this->serviceEntry(
-                'Colocation',
-                'colocation',
-                'Hosting & Infrastructure',
-                'server',
-                'Secure Tier III+ rack space with flexible power, carrier-neutral connectivity, and 24/7 remote hands in Oslo and Stockholm.',
-                ['colocation', 'Nordic data centre', 'Tier III+', 'rack space', 'renewable hosting'],
+                'Strategy & Advisory',
+                'strategy-advisory',
+                'Advisory Services',
+                'compass',
+                'Define the opportunity, test the business case and create a practical path to capacity.',
+                ['data center strategy', 'feasibility studies', 'site evaluation', 'development strategy', 'business planning'],
                 [
-                    ['Rack formats', 'Quarter, half, full, suite', 'Right-size without overcommit', 'Hot-aisle containment'],
-                    ['Power density', 'Up to 50 kW / rack', 'Support AI and HPC growth', 'Liquid assist optional'],
-                    ['Cross-connects', '42+ carriers on-site', 'Multi-cloud without transit', 'Meet-me room access'],
-                    ['Remote hands', '24/7 smart hands', 'Faster incident resolution', 'Ticket portal + phone'],
+                    [
+                        'title' => 'Market & Capacity Assessment',
+                        'description' => 'Assess market demand, supply, pricing and competitive dynamics to identify where capacity can be developed or accessed.',
+                    ],
+                    [
+                        'title' => 'Feasibility Studies',
+                        'description' => 'Test technical, commercial and development assumptions before significant capital or time is committed.',
+                    ],
+                    [
+                        'title' => 'Site Evaluation',
+                        'description' => 'Evaluate power availability, connectivity, land, utilities, approvals and other factors that influence site viability.',
+                    ],
+                    [
+                        'title' => 'Development Strategy',
+                        'description' => 'Translate the opportunity into a phased development plan covering capacity, infrastructure, partners and execution priorities.',
+                    ],
+                    [
+                        'title' => 'Business Planning',
+                        'description' => 'Build the operating and commercial framework required to take a data center opportunity from concept toward implementation.',
+                    ],
                 ],
                 1,
             ),
             $this->serviceEntry(
-                'Dedicated Server Hosting',
-                'dedicated-server-hosting',
-                'Hosting & Infrastructure',
-                'hard-drive',
-                'Bare-metal and dedicated clusters with guaranteed resources, custom hardware profiles, and private cage options.',
-                ['dedicated servers', 'bare metal', 'private hosting', 'Nordic dedicated hosting'],
+                'Investment & Due Diligence',
+                'investment-due-diligence',
+                'Advisory Services',
+                'chart-line',
+                'Give investors and decision-makers the technical and financial clarity needed to commit capital.',
+                ['investment due diligence', 'financial analysis', 'technical due diligence', 'CAPEX benchmarking', 'project reports'],
                 [
-                    ['Hardware profiles', 'Custom CPU, GPU, NVMe', 'Predictable performance', 'Vendor-neutral BOM'],
-                    ['Network', '10/25/100 GbE options', 'Low-latency east-west', 'BGP sessions available'],
-                    ['Security zones', 'Private cages & suites', 'Regulated workload isolation', 'Biometric access'],
-                    ['Lifecycle', 'RMA & disposal services', 'Audit-ready asset tracking', 'WEEE-compliant recycling'],
+                    [
+                        'title' => 'Detailed Project Reports',
+                        'description' => 'Structure project assumptions, scope, phasing, costs and implementation plans into a decision-ready project report.',
+                    ],
+                    [
+                        'title' => 'Financial Analysis',
+                        'description' => 'Evaluate CAPEX, operating costs, revenue assumptions and project economics to understand investment potential.',
+                    ],
+                    [
+                        'title' => 'Technical Due Diligence',
+                        'description' => 'Review power, cooling, electrical, mechanical, network and site infrastructure to identify technical risks and gaps.',
+                    ],
+                    [
+                        'title' => 'CAPEX Benchmarking',
+                        'description' => 'Test major cost assumptions against project scope, capacity and market benchmarks to improve capital planning.',
+                    ],
+                    [
+                        'title' => 'Investment Decision Support',
+                        'description' => 'Convert technical findings into clear commercial implications, risks, opportunities and decision points.',
+                    ],
                 ],
                 2,
             ),
             $this->serviceEntry(
-                'High-Density HPC Hosting',
-                'high-density-hpc-hosting',
-                'Hosting & Infrastructure',
-                'cpu',
-                'Liquid-ready halls for AI training, simulation, and scientific compute up to 50 kW per rack with academic peering.',
-                ['HPC hosting', 'AI infrastructure', 'high-density racks', 'liquid cooling'],
+                'Engineering & Design',
+                'engineering-design',
+                'Advisory Services',
+                'blueprint',
+                'Translate compute requirements into resilient power, cooling and infrastructure solutions.',
+                ['power infrastructure', 'electrical systems', 'cooling design', 'AI infrastructure', 'high-density compute'],
                 [
-                    ['Cooling', 'Hybrid air + liquid', 'Sustain dense GPU pods', 'ASHRAE-compliant inlet'],
-                    ['Power', 'Dual-feed A+B', 'Eliminate single points', 'Busway monitoring'],
-                    ['Peering', 'NREN & R&E links', 'Faster dataset movement', 'Scandinavian research grids'],
-                    ['Scheduling', 'Batch-friendly design', 'Optimise capex per FLOP', 'Power capping APIs'],
+                    [
+                        'title' => 'Power Infrastructure',
+                        'description' => 'Define utility, generation, substation and distribution strategies aligned with required capacity and resilience.',
+                    ],
+                    [
+                        'title' => 'Electrical Systems',
+                        'description' => 'Develop electrical architecture covering MV/LV distribution, UPS, switchgear, busways and critical power paths.',
+                    ],
+                    [
+                        'title' => 'Cooling & Mechanical',
+                        'description' => 'Assess cooling architecture and mechanical systems for conventional and high-density compute environments.',
+                    ],
+                    [
+                        'title' => 'AI & High-Density Infrastructure',
+                        'description' => 'Plan infrastructure around high-density GPU deployments, rack power, thermal loads and associated network requirements.',
+                    ],
+                    [
+                        'title' => 'Design Coordination',
+                        'description' => 'Coordinate technical inputs across disciplines so engineering decisions remain aligned with the commercial and delivery objectives.',
+                    ],
                 ],
                 3,
             ),
             $this->serviceEntry(
-                'Cloud Connectivity',
-                'cloud-connectivity',
-                'Cloud & Connectivity',
-                'cloud',
-                'Direct, low-latency on-ramps to AWS, Azure, Google Cloud, and Oracle with virtual routing and private exchanges.',
-                ['cloud on-ramp', 'hybrid cloud', 'direct connect', 'multi-cloud networking'],
+                'Procurement & Execution',
+                'procurement-execution',
+                'Advisory Services',
+                'package',
+                'Help clients source the right equipment and coordinate the path from technical design to delivery.',
+                ['vendor evaluation', 'equipment sourcing', 'procurement support', 'technical compliance', 'project coordination'],
                 [
-                    ['On-ramps', 'AWS, Azure, GCP, OCI', 'Predictable cloud latency', 'Dedicated VLAN handoff'],
-                    ['Latency', 'Sub-5 ms regional', 'Responsive hybrid apps', 'Measured monthly'],
-                    ['Architecture', 'Cloud exchange fabric', 'Simpler BGP policies', 'Redundant paths'],
-                    ['Billing', 'Port + cross-connect model', 'Transparent unit economics', 'No hidden transit'],
+                    [
+                        'title' => 'Vendor Evaluation',
+                        'description' => 'Identify and assess vendors against technical capability, commercial fit, delivery capacity and project requirements.',
+                    ],
+                    [
+                        'title' => 'Technical Compliance',
+                        'description' => 'Review technical offers and specifications to ensure proposed equipment meets the defined performance requirements.',
+                    ],
+                    [
+                        'title' => 'Equipment Sourcing',
+                        'description' => 'Support sourcing of critical electrical, mechanical, cooling and data center infrastructure equipment.',
+                    ],
+                    [
+                        'title' => 'Procurement Support',
+                        'description' => 'Assist with bid comparisons, technical clarifications, commercial evaluation and procurement decision-making.',
+                    ],
+                    [
+                        'title' => 'Project Coordination',
+                        'description' => 'Coordinate stakeholders, suppliers and technical teams to keep key delivery activities aligned with project priorities.',
+                    ],
                 ],
                 4,
             ),
             $this->serviceEntry(
-                'Internet Transit & IP Services',
-                'internet-transit-ip-services',
-                'Cloud & Connectivity',
-                'globe',
-                'Carrier-grade IP transit, BGP peering, and Anycast delivery with DDoS-scrubbing handoff options.',
-                ['IP transit', 'BGP peering', 'Anycast', 'Nordic connectivity'],
+                'Demand Generation',
+                'demand-generation',
+                'Advisory Services',
+                'users',
+                'Help data centers connect with qualified potential clients for colocation, GPU capacity and Build to Suit opportunities.',
+                ['colocation demand', 'GPU capacity', 'build to suit', 'client qualification', 'opportunity development'],
                 [
-                    ['Transit', 'Multi-homed upstreams', 'Resilient global reach', 'SLA-backed packet delivery'],
-                    ['BGP', 'Full table or partial', 'Traffic engineering control', 'Communities supported'],
-                    ['IPv6', 'Dual-stack ready', 'Future-proof addressing', 'PI space guidance'],
-                    ['DDoS handoff', 'Scrubbing partners', 'Protect edge services', 'Clean pipe options'],
+                    [
+                        'title' => 'Colocation Demand',
+                        'description' => 'Identify and connect data centers with enterprises and digital businesses looking for reliable colocation capacity.',
+                    ],
+                    [
+                        'title' => 'GPU Capacity Demand',
+                        'description' => 'Connect available AI compute capacity with organizations seeking GPU infrastructure for training, inference and other workloads.',
+                    ],
+                    [
+                        'title' => 'Build to Suit Opportunities',
+                        'description' => 'Help data center developers identify potential customers with requirements for dedicated or purpose-built infrastructure.',
+                    ],
+                    [
+                        'title' => 'Client Qualification',
+                        'description' => 'Understand prospective clients\' capacity, power, density, location, timeline and commercial requirements to improve opportunity quality.',
+                    ],
+                    [
+                        'title' => 'Opportunity Development',
+                        'description' => 'Support introductions and commercial discussions that help move qualified data center demand toward actionable opportunities.',
+                    ],
                 ],
                 5,
-            ),
-            $this->serviceEntry(
-                'SD-WAN & Private Networking',
-                'sd-wan-private-networking',
-                'Cloud & Connectivity',
-                'network',
-                'MPLS-alternative fabrics, encrypted site-to-site links, and SD-WAN hub colocation inside carrier-neutral facilities.',
-                ['SD-WAN colocation', 'private networking', 'site-to-site encryption', 'WAN hub'],
-                [
-                    ['Topology', 'Hub-and-spoke or mesh', 'Match org structure', 'Active/active options'],
-                    ['Encryption', 'MACsec / IPsec', 'Confidentiality in transit', 'HSM integration paths'],
-                    ['Hubs', 'Oslo & Stockholm POPs', 'Regional aggregation', 'Cross-border EU paths'],
-                    ['Observability', 'NetFlow export', 'Faster troubleshooting', 'SIEM-friendly feeds'],
-                ],
-                6,
-            ),
-            $this->serviceEntry(
-                'Managed Infrastructure',
-                'managed-infrastructure',
-                'Managed Services',
-                'settings',
-                'End-to-end lifecycle management for hardware, OS patching, backups, monitoring, and incident response.',
-                ['managed infrastructure', 'managed hosting', 'NOC services', '24/7 operations'],
-                [
-                    ['Scope', 'OS, firmware, backups', 'Reduce internal toil', 'Customisable runbooks'],
-                    ['Monitoring', 'Infra + app probes', 'Earlier anomaly detection', 'PagerDuty integration'],
-                    ['Patching', 'CAB-aligned windows', 'Lower vulnerability exposure', 'Rollback procedures'],
-                    ['Incidents', 'Sev-based response', 'MTTR improvements', 'Post-incident reviews'],
-                ],
-                7,
-            ),
-            $this->serviceEntry(
-                'Remote Hands & Smart Hands',
-                'remote-hands-smart-hands',
-                'Managed Services',
-                'wrench',
-                'On-site technicians for rack-and-stack, cable testing, media swaps, and emergency break-fix support.',
-                ['remote hands', 'smart hands', 'data centre technicians', 'on-site support'],
-                [
-                    ['Tasks', 'Rack, cable, label', 'Accurate installs', 'Photo verification'],
-                    ['SLA tiers', 'Standard & emergency', 'Match maintenance windows', '24/7 escalation'],
-                    ['Access', 'Escorted vendor visits', 'Chain-of-custody', 'Visitor logging'],
-                    ['Tooling', 'Certified test gear', 'Fewer repeat truck rolls', 'OTDR & copper certification'],
-                ],
-                8,
-            ),
-            $this->serviceEntry(
-                'Backup & Disaster Recovery',
-                'backup-disaster-recovery',
-                'Managed Services',
-                'database-backup',
-                'Geo-diverse backup targets, immutable snapshots, and runbook-driven failover exercises.',
-                ['disaster recovery', 'backup colocation', 'immutable backups', 'BCP hosting'],
-                [
-                    ['Targets', 'On-site + off-site', '3-2-1 alignment', 'Encrypted at rest'],
-                    ['RPO/RTO', 'Contractual tiers', 'Business-aligned recovery', 'Quarterly drill option'],
-                    ['Immutability', 'Snapshot locking', 'Ransomware resilience', 'Policy-based retention'],
-                    ['Runbooks', 'Documented failover', 'Faster executive confidence', 'Cross-team tabletop'],
-                ],
-                9,
-            ),
-            $this->serviceEntry(
-                'Cybersecurity & SOC Services',
-                'cybersecurity-soc-services',
-                'Security & Compliance',
-                'shield-check',
-                'Perimeter hardening, SIEM feed integration, vulnerability coordination, and 24/7 security operations support.',
-                ['SOC services', 'cybersecurity', 'SIEM integration', 'security operations'],
-                [
-                    ['Monitoring', 'Facility + logical feeds', 'Unified incident view', 'CEF/JSON export'],
-                    ['Hardening', 'Baseline templates', 'Reduce misconfiguration', 'CIS-aligned guides'],
-                    ['Vuln mgmt', 'Scan coordination', 'Prioritised remediation', 'Change windows respected'],
-                    ['Response', 'Playbook-driven', 'Containment faster', 'Forensic preservation'],
-                ],
-                10,
-            ),
-            $this->serviceEntry(
-                'Compliance & Audit Readiness',
-                'compliance-audit-readiness',
-                'Security & Compliance',
-                'file-check',
-                'Control mapping, evidence packs, and auditor liaison for GDPR, PCI DSS, and NIS2 programmes.',
-                ['compliance hosting', 'audit readiness', 'GDPR infrastructure', 'audit-ready colocation'],
-                [
-                    ['Frameworks', 'SOC 2, PCI, NIS2, GDPR', 'Faster audit cycles', 'Pre-mapped controls'],
-                    ['Evidence', 'Policy & test artefacts', 'Reduce questionnaire fatigue', 'Portal downloads'],
-                    ['Data residency', 'EU/EEA facilities', 'Regulatory alignment', 'No unexpected transfers'],
-                    ['Auditor support', 'Dedicated liaison', 'Shorter audit duration', 'Clarification SLAs'],
-                ],
-                11,
-            ),
-            $this->serviceEntry(
-                'Infrastructure Consulting',
-                'infrastructure-consulting',
-                'Consulting',
-                'compass',
-                'Architecture reviews, TCO modelling, migration planning, and sustainability assessments for digital infrastructure.',
-                ['infrastructure consulting', 'data centre strategy', 'migration planning', 'TCO analysis'],
-                [
-                    ['Discovery', 'Workshop-led', 'Shared problem definition', 'Stakeholder alignment'],
-                    ['Modelling', '5-year TCO scenarios', 'Informed capex/opex', 'Sensitivity analysis'],
-                    ['Migration', 'Phased cutover plans', 'Lower downtime risk', 'Rollback checkpoints'],
-                    ['Sustainability', 'Carbon allocation', 'ESG reporting support', 'PUE & REC guidance'],
-                ],
-                12,
             ),
         ];
     }
@@ -616,7 +602,7 @@ class ServiceSolutionSeeder extends Seeder
     }
 
     /** @param  array<int, string>  $keywords
-     * @param  array<int, array<int, string>>  $tableRows
+     * @param  array<int, array{title: string, description: string}>  $items
      * @return array<string, mixed>
      */
     private function serviceEntry(
@@ -626,7 +612,7 @@ class ServiceSolutionSeeder extends Seeder
         string $icon,
         string $shortDescription,
         array $keywords,
-        array $tableRows,
+        array $items,
         int $sortOrder,
     ): array {
         return [
@@ -635,12 +621,12 @@ class ServiceSolutionSeeder extends Seeder
             'category' => $category,
             'short_description' => $shortDescription,
             'icon' => $icon,
-            'cta_text' => 'Request a Consultation',
+            'cta_text' => 'Start a Conversation',
             'cta_url' => '/contact',
             'sort_order' => $sortOrder,
             'status' => 'published',
             'keywords' => $keywords,
-            'table_rows' => $tableRows,
+            'items' => $items,
         ];
     }
 

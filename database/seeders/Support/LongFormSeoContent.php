@@ -310,6 +310,36 @@ HTML;
 HTML;
     }
 
+    /** @param  array<int, array{title: string, description: string}>  $items */
+    public static function advisoryServiceBody(
+        string $title,
+        string $shortDescription,
+        array $items,
+        array $focusKeywords,
+    ): string {
+        $keywordPhrase = implode(', ', $focusKeywords);
+        $itemsHtml = '';
+
+        foreach ($items as $item) {
+            $itemsHtml .= '<h3>'.e($item['title']).'</h3>';
+            $itemsHtml .= '<p>'.e($item['description']).'</p>';
+        }
+
+        return <<<HTML
+<p>{$shortDescription}</p>
+<h2>What we deliver</h2>
+{$itemsHtml}
+<h2>Why it matters</h2>
+<p>Data center and AI infrastructure decisions carry significant commercial, technical and execution risk. {$title} brings structured analysis and practical guidance so stakeholders can move from opportunity to action with greater confidence.</p>
+<p>Our multidisciplinary team combines commercial understanding, engineering depth and delivery experience across {$keywordPhrase}. We work alongside investors, developers and operators to align assumptions, surface risks early and define clear next steps.</p>
+<h2>How we work</h2>
+<p>Engagements typically begin with a focused discovery conversation to understand your objectives, constraints and timeline. We then scope the work, assign the right specialists and deliver decision-ready outputs — whether that is a feasibility assessment, due diligence report, design recommendation or procurement plan.</p>
+<p>Where projects continue into engineering, procurement or demand development, we maintain continuity so commercial and technical decisions stay connected throughout the journey.</p>
+<h2>Get started</h2>
+<p>Whether you are evaluating a new data center opportunity, assessing an investment, designing high-density infrastructure or connecting capacity with qualified demand, we can help identify the next critical step. <a href="/contact">Contact us</a> to discuss your requirements.</p>
+HTML;
+    }
+
     private static function conclusion(string $title, string $slug, string $type): string
     {
         $path = $type === 'services' ? 'services' : 'solutions';

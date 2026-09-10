@@ -10,7 +10,7 @@
 @endphp
 
 <section
-    class="relative text-white min-h-[calc(100vh-4.75rem)] lg:min-h-[calc(100vh-5rem)] flex flex-col overflow-hidden -mt-px"
+    class="relative text-white min-h-[calc(100vh-var(--site-header-height))] flex flex-col overflow-hidden"
     x-data="heroCarousel(@js($slidesData))"
     @mouseenter="stopAutoplay()"
     @mouseleave="slides.length > 1 && startAutoplay()"
@@ -42,7 +42,7 @@
     </div>
 
     {{-- Hero content overlay --}}
-    <div class="relative z-30 flex-1 flex items-center pt-8 lg:pt-12 pb-6">
+    <div class="relative z-30 flex-1 flex items-center pt-6 lg:pt-8 pb-6">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <template x-if="slides.length">
                 <div class="max-w-2xl lg:max-w-3xl" :key="active">

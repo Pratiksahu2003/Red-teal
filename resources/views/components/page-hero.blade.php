@@ -17,7 +17,7 @@
     $alignClass = $align === 'center' ? 'items-center' : 'items-end';
 @endphp
 
-<section class="relative pt-32 pb-16 lg:pb-20 bg-brand-900 text-white overflow-hidden {{ $heightClass }} flex {{ $alignClass }}">
+<section class="relative pt-8 lg:pt-10 pb-16 lg:pb-20 bg-brand-900 text-white overflow-hidden {{ $heightClass }} flex {{ $alignClass }}">
     <div class="absolute inset-0">
         <img src="{{ hero_image_url($image, $fallback) }}" alt="{{ $alt }}" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/35"></div>

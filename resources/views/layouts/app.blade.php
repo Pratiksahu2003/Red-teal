@@ -24,7 +24,7 @@
 
     @include('components.navbar')
 
-    <main>@yield('content')</main>
+    <main class="site-main">@yield('content')</main>
 
     @include('components.footer')
 
